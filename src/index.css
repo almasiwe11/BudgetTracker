@@ -1,0 +1,64 @@
+:root {
+  --color-black-1: #1e1f21;
+  --color-grey-1: #404040;
+  --color-border: #464648;
+  --color-grey-light: #dddcdd;
+  --color-grey-2: #565759;
+  --color-grey-light-2: #e6e6e6;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background-color: var(--color-grey-1);
+}
+
+.dayCell {
+  border: 1px solid var(--color-border);
+  padding: 2rem;
+  color: white;
+}
+
+.header {
+  height: 8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--color-grey-1);
+  color: white;
+}
+
+.switchMonth {
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: orange;
+  background-color: var(--color-grey-1);
+  border: none;
+  cursor: pointer;
+}
+
+.weekDay {
+  color: var(--color-grey-light);
+  margin-bottom: 0.5rem;
+}
+
+.currentMonth {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 1.4rem;
+}
+
+.disabled {
+  opacity: 0.3;
+}
+
+.wrongMonth {
+  color: var(--color-black-1);
+}
