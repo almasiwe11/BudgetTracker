@@ -78,3 +78,26 @@
 .wrongMonth {
   color: var(--color-black-1);
 }
+
+/* Small GRID */
+
+.small-week {
+  display: grid;
+  grid-template-columns: 30px repeat(7, 1fr) 30px;
+}
+
+.smallGrid {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
+
+.day-small {
+  background-color: var(--color-grey-1);
+  border: 1px solid var(--color-border);
+  color: var(--color-grey-light);
+}
+
+.small-today {
+  background-color: red;
+}
