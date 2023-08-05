@@ -86,18 +86,57 @@
   grid-template-columns: 30px repeat(7, 1fr) 30px;
 }
 
+.showEntireMonth {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 25px repeat(6, 40px);
+}
+
 .smallGrid {
   width: 50%;
   margin: auto;
   text-align: center;
+  background-color: var(--color-grey-1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .day-small {
   background-color: var(--color-grey-1);
   border: 1px solid var(--color-border);
   color: var(--color-grey-light);
+  display: grid;
+  place-content: center;
 }
 
 .small-today {
   background-color: red;
+}
+
+.btnWeek {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: orange;
+}
+
+.small-date {
+  color: white;
+  display: grid;
+  place-items: center;
+  padding: 0.7rem;
+}
+
+.showMonthBtnLeft {
+  position: absolute;
+  top: 3%;
+  left: 42%;
+}
+
+.showMonthBtnRight {
+  position: absolute;
+  top: 3%;
+  right: 42%;
 }

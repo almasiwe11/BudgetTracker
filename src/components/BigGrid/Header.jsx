@@ -17,7 +17,7 @@ const Header = ({ setToday, today }) => {
 
   return (
     <div className="header">
-      <button className="switchMonth" onClick={handlePrevMonth}>
+      <button className="switchMonth btn" onClick={handlePrevMonth}>
         ◀
       </button>
       <span className="currentMonth">
@@ -25,7 +25,7 @@ const Header = ({ setToday, today }) => {
         <p> {month}</p>
       </span>
       <button
-        className={`switchMonth ${disabled && "disabled"}`}
+        className={`switchMonth btn ${disabled && "disabled"}`}
         onClick={handleNextMonth}
         disabled={disabled}
       >
