@@ -66,6 +66,7 @@
   color: var(--color-grey-light);
   display: grid;
   place-content: center;
+  cursor: pointer;
 }
 
 .wrongMonth {
@@ -108,4 +109,8 @@ button:disabled {
   right: 4%;
   font-size: 1.3rem;
   cursor: pointer;
+}
+
+.app {
+  display: grid;
 }

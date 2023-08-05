@@ -75,6 +75,7 @@ const CalendarGrid = ({ today, setToday, setSelectedDay }) => {
             showEntireMonth={showEntireMonth}
             key={day}
             today={today}
+            setShowEntireMonth={setShowEntireMonth}
           />
         ))}
         <button
