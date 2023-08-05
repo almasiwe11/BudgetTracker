@@ -1,13 +1,12 @@
 import { useState } from "react";
-import SmallGrid from "./components/SmallGrid/SmallGrid";
-import BigGrid from "./components/BigGrid/BigGrid";
+import CalendarGrid from "./components/CalendarGrid/CalendarGrid";
 import Body from "./Body/Body";
 function App() {
   const [today, setToday] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(today);
   return (
     <>
-      <SmallGrid
+      <CalendarGrid
         today={today}
         setToday={setToday}
         setSelectedDay={setSelectedDay}
@@ -18,7 +17,3 @@ function App() {
 }
 
 export default App;
-
-{
-  /* <BigGrid today={today} setToday={setToday} /> */
-}
