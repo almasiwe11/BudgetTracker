@@ -4,6 +4,7 @@ import Body from "./Body/Body";
 function App() {
   const [today, setToday] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(today);
+  console.log(selectedDay);
   return (
     <>
       <CalendarGrid

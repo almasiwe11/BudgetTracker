@@ -37,10 +37,6 @@
   opacity: 0.3;
 }
 
-.wrongMonth {
-  color: var(--color-black-1);
-}
-
 /* Small GRID */
 
 .showWeek {
@@ -70,6 +66,10 @@
   color: var(--color-grey-light);
   display: grid;
   place-content: center;
+}
+
+.wrongMonth {
+  color: var(--color-grey-2);
 }
 
 .markToday {
