@@ -3,8 +3,7 @@ import CalendarGrid from "./components/CalendarGrid/CalendarGrid";
 import Body from "./components/Body/Body";
 import AllApps from "./components/AllApps/AllApps";
 function App() {
-  const [today, setToday] = useState(new Date());
-  const [selectedDay, setSelectedDay] = useState(today);
+  const [selectedDay, setSelectedDay] = useState(new Date());
   return (
     <div className="app">
       <AllApps />
