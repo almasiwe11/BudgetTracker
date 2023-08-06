@@ -9,10 +9,10 @@ import {
   isFuture,
   startOfWeek,
 } from "date-fns";
-import DayCell from "./DayCell";
-import Header from "./Header";
-import DayNames from "./DayNames";
-const CalendarGrid = ({ today, setToday, setSelectedDay }) => {
+import DayCell from "./DayCell/DayCell";
+import Header from "./Header/Header";
+import DayNames from "./DayNames/DayNames";
+const CalendarGrid = ({ today, setToday, setSelectedDay, selectedDay }) => {
   const [showEntireMonth, setShowEntireMonth] = useState(false);
   let startMonday;
   if (showEntireMonth) {
@@ -76,6 +76,7 @@ const CalendarGrid = ({ today, setToday, setSelectedDay }) => {
             key={day}
             today={today}
             setShowEntireMonth={setShowEntireMonth}
+            selectedDay={selectedDay}
           />
         ))}
         <button

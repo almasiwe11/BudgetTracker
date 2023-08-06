@@ -1,0 +1,20 @@
+.dayCell {
+  background-color: var(--color-background-9);
+  border: 1px solid var(--color-border);
+  color: var(--color-grey-light);
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+
+.markToday {
+  background-color: #dc2626;
+}
+
+.wrongMonth {
+  color: var(--color-grey-2);
+}
+
+.selectedDay {
+  border: 1px solid cyan;
+}

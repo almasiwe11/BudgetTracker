@@ -1,0 +1,35 @@
+.header {
+  color: var(--color-grey-light);
+  height: 3rem;
+  padding: 0.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
+  position: relative;
+}
+
+.toggleView {
+  position: absolute;
+  right: 4%;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.calendar-icon {
+  height: 28px;
+  width: 28px;
+  &:hover {
+    transition: 0.3s ease-out;
+    fill: var(--color-green);
+  }
+}
+
+.close-icon {
+  height: 28px;
+  width: 28px;
+  &:hover {
+    transition: 0.3s ease-out;
+    fill: var(--color-green);
+  }
+}

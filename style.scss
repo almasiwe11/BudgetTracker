@@ -1,0 +1,42 @@
+@use "./src/components/CalendarGrid/DayCell/dayCell.scss";
+@use "./src/components/CalendarGrid/calendarGrid.scss";
+@use "./src/components/CalendarGrid/Header/header.scss";
+@use "./src/components/AllApps/allApps.scss";
+:root {
+  --color-black-1: #1e1f21;
+  --color-grey-1: #404040;
+  --color-border: #464648;
+  --color-grey-light: #dddcdd;
+  --color-grey-2: #565759;
+  --color-grey-light-2: #e6e6e6;
+  --color-primary: #6741d9;
+  --color-primary-light: #7950f2;
+  --color-text: #dee2e6;
+  --color-text-dark: #adb5bd;
+  --color-background-100: #343a40;
+  --color-background-500: #2b3035;
+  --color-background-900: #212529;
+  --color-red: #fa5252;
+  --color-red-dark: #e03131;
+  --color-green: #16a34a;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.hide {
+  display: none;
+}
+
+button:disabled {
+  opacity: 0.3;
+}
+
+body {
+  background-color: var(--color-background-900);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}

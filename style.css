@@ -1,0 +1,154 @@
+.dayCell {
+  background-color: var(--color-background-9);
+  border: 1px solid var(--color-border);
+  color: var(--color-grey-light);
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+
+.markToday {
+  background-color: #dc2626;
+}
+
+.wrongMonth {
+  color: var(--color-grey-2);
+}
+
+.selectedDay {
+  border: 1px solid cyan;
+}
+
+.weekDay {
+  color: var(--color-grey-light);
+  margin-bottom: 0.5rem;
+}
+
+.showWeek {
+  display: grid;
+  grid-template-columns: 30px repeat(7, 1fr) 30px;
+}
+
+.showEntireMonth {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 25px repeat(6, 40px);
+}
+
+.calendarGrid {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+  background-color: var(--color-background-900);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.calendarGrid button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: orange;
+}
+
+.header {
+  color: var(--color-grey-light);
+  height: 3rem;
+  padding: 0.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
+  position: relative;
+}
+
+.toggleView {
+  position: absolute;
+  right: 4%;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.calendar-icon {
+  height: 28px;
+  width: 28px;
+}
+.calendar-icon:hover {
+  transition: 0.3s ease-out;
+  fill: var(--color-green);
+}
+
+.close-icon {
+  height: 28px;
+  width: 28px;
+}
+.close-icon:hover {
+  transition: 0.3s ease-out;
+  fill: var(--color-green);
+}
+
+.allApps {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  height: 7vh;
+  transform: translateX(-50%);
+  justify-content: center;
+  width: 30%;
+  text-align: center;
+}
+.allApps > * {
+  display: grid;
+  place-content: center;
+  width: 100%;
+  color: var(--color-grey-light);
+}
+
+.budget-svg {
+  fill: #16a34a;
+  height: 45px;
+  width: 45px;
+}
+
+:root {
+  --color-black-1: #1e1f21;
+  --color-grey-1: #404040;
+  --color-border: #464648;
+  --color-grey-light: #dddcdd;
+  --color-grey-2: #565759;
+  --color-grey-light-2: #e6e6e6;
+  --color-primary: #6741d9;
+  --color-primary-light: #7950f2;
+  --color-text: #dee2e6;
+  --color-text-dark: #adb5bd;
+  --color-background-100: #343a40;
+  --color-background-500: #2b3035;
+  --color-background-900: #212529;
+  --color-red: #fa5252;
+  --color-red-dark: #e03131;
+  --color-green: #16a34a;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.hide {
+  display: none;
+}
+
+button:disabled {
+  opacity: 0.3;
+}
+
+body {
+  background-color: var(--color-background-900);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+/*# sourceMappingURL=style.css.map */

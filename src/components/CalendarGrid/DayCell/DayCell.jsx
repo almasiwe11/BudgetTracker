@@ -7,12 +7,15 @@ const DayCell = ({
   showEntireMonth,
   today,
   setShowEntireMonth,
+  selectedDay,
 }) => {
   const formattedDay = format(day, "dd");
   const nameDay = format(day, "EE");
+  let selected = false;
   let wrongMonth = false;
   if (!isSameMonth(today, day) || isFuture(day)) wrongMonth = true;
-
+  if (isSameDay(selectedDay, day) && !isSameDay(selectedDay, new Date()))
+    selected = true;
   let markToday;
   if (isSameDay(new Date(), day)) markToday = true;
 
@@ -24,7 +27,7 @@ const DayCell = ({
     <div
       className={`dayCell ${markToday && "markToday"} ${
         wrongMonth && "wrongMonth"
-      }`}
+      } ${selected && "selectedDay"}`}
       onClick={handleClick}
     >
       <div>{formattedDay}</div>
