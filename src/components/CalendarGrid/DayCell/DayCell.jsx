@@ -8,6 +8,7 @@ const DayCell = ({
   today,
   setShowEntireMonth,
   selectedDay,
+  setToday,
 }) => {
   const formattedDay = format(day, "dd");
   const nameDay = format(day, "EE");
@@ -22,8 +23,10 @@ const DayCell = ({
   function handleClick() {
     if (isFuture(day)) return;
     setSelectedDay(day);
+    setToday(day);
     showEntireMonth && setShowEntireMonth(false);
   }
+
   return (
     <div
       className={`dayCell ${markToday && "markToday"} ${

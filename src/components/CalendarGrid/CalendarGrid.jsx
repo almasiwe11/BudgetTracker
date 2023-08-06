@@ -17,19 +17,26 @@ import {
 import DayCell from "./DayCell/DayCell";
 import Header from "./Header/Header";
 import DayNames from "./DayNames/DayNames";
-const CalendarGrid = ({ today, setToday, setSelectedDay, selectedDay }) => {
-  const [showEntireMonth, setShowEntireMonth] = useState(false);
+const CalendarGrid = ({
+  today,
+  setToday,
+  setSelectedDay,
+  selectedDay,
+  handleNext,
+  handlePrev,
+  showEntireMonth,
+  setShowEntireMonth,
+  disabled,
+}) => {
   let startMonday;
   if (showEntireMonth) {
     const startMonthDay = startOfMonth(today);
     startMonday = startOfWeek(startMonthDay, { weekStartsOn: 1 });
+  } else if (selectedDay) {
+    startMonday = startOfWeek(today, { weekStartsOn: 1 });
   } else {
     startMonday = startOfWeek(today, { weekStartsOn: 1 });
   }
-
-  /*  else if (selectedDay) {
-    startMonday = startOfWeek(selectedDay, { weekStartsOn: 1 });
-  }  */
 
   const month = format(today, "MMMM");
   const year = format(today, "yyyy");
@@ -40,36 +47,8 @@ const CalendarGrid = ({ today, setToday, setSelectedDay, selectedDay }) => {
     format(add(startMonday, { days: i }), "EEEE")
   );
 
-  let disabled = true;
-  if (!isFuture(add(startOfWeek(today), { weeks: 1 }))) disabled = false;
-
-  function handlePrev() {
-    if (showEntireMonth) {
-      setToday((today) => sub(today, { months: 1 }));
-    } else {
-      setToday((today) => sub(today, { weeks: 1 }));
-    }
-  }
-
-  function handleNext() {
-    if (!disabled) {
-      !showEntireMonth && setToday((today) => add(today, { weeks: 1 }));
-      showEntireMonth && setToday((today) => add(today, { months: 1 }));
-    }
-  }
-
   return (
     <div className="calendarGrid">
-      <Header
-        month={month}
-        year={year}
-        showEntireMonth={showEntireMonth}
-        handleNext={handleNext}
-        handlePrev={handlePrev}
-        disabled={disabled}
-        setShowEntireMonth={setShowEntireMonth}
-        selectedDay={selectedDay}
-      />
       <div className={showEntireMonth ? "showEntireMonth" : "showWeek"}>
         {showEntireMonth && <DayNames weekDaysName={weekDaysName} />}
 
@@ -83,6 +62,7 @@ const CalendarGrid = ({ today, setToday, setSelectedDay, selectedDay }) => {
             day={day}
             setSelectedDay={setSelectedDay}
             showEntireMonth={showEntireMonth}
+            setToday={setToday}
             key={day}
             today={today}
             setShowEntireMonth={setShowEntireMonth}
