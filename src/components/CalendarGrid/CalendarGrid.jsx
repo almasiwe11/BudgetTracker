@@ -1,5 +1,9 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
+import { AiOutlineLeftCircle } from "react-icons/ai";
+import { AiFillLeftCircle } from "react-icons/ai";
+import { AiFillRightCircle } from "react-icons/ai";
+import { AiOutlineRightCircle } from "react-icons/ai";
 import {
   format,
   add,
@@ -61,12 +65,10 @@ const CalendarGrid = ({ today, setToday, setSelectedDay, selectedDay }) => {
       <div className={showEntireMonth ? "showEntireMonth" : "showWeek"}>
         {showEntireMonth && <DayNames weekDaysName={weekDaysName} />}
 
-        <button
-          className={showEntireMonth ? "hide" : "btnWeek"}
+        <AiOutlineLeftCircle
+          className={showEntireMonth ? "hide" : "btnMonth"}
           onClick={handlePrev}
-        >
-          ◀
-        </button>
+        />
 
         {monthDays.map((day) => (
           <DayCell
@@ -79,13 +81,11 @@ const CalendarGrid = ({ today, setToday, setSelectedDay, selectedDay }) => {
             selectedDay={selectedDay}
           />
         ))}
-        <button
-          className={showEntireMonth ? "hide" : "btnWeek"}
+        <AiOutlineRightCircle
+          className={showEntireMonth ? "hide" : "btnMonth"}
           onClick={handleNext}
           disabled={disabled}
-        >
-          ▶
-        </button>
+        />
       </div>
     </div>
   );

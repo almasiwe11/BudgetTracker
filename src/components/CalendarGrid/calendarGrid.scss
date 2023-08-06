@@ -31,3 +31,12 @@
   font-size: 1.4rem;
   color: orange;
 }
+
+.btnMonth {
+  align-self: center;
+  justify-self: center;
+  fill: var(--color-grey-light);
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+}
