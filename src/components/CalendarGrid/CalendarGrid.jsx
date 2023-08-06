@@ -12,6 +12,7 @@ import {
   sub,
   isFuture,
   startOfWeek,
+  isSameDay,
 } from "date-fns";
 import DayCell from "./DayCell/DayCell";
 import Header from "./Header/Header";
@@ -25,6 +26,10 @@ const CalendarGrid = ({ today, setToday, setSelectedDay, selectedDay }) => {
   } else {
     startMonday = startOfWeek(today, { weekStartsOn: 1 });
   }
+
+  /*  else if (selectedDay) {
+    startMonday = startOfWeek(selectedDay, { weekStartsOn: 1 });
+  }  */
 
   const month = format(today, "MMMM");
   const year = format(today, "yyyy");
@@ -47,8 +52,10 @@ const CalendarGrid = ({ today, setToday, setSelectedDay, selectedDay }) => {
   }
 
   function handleNext() {
-    !showEntireMonth && setToday((today) => add(today, { weeks: 1 }));
-    showEntireMonth && setToday((today) => add(today, { months: 1 }));
+    if (!disabled) {
+      !showEntireMonth && setToday((today) => add(today, { weeks: 1 }));
+      showEntireMonth && setToday((today) => add(today, { months: 1 }));
+    }
   }
 
   return (
@@ -61,6 +68,7 @@ const CalendarGrid = ({ today, setToday, setSelectedDay, selectedDay }) => {
         handlePrev={handlePrev}
         disabled={disabled}
         setShowEntireMonth={setShowEntireMonth}
+        selectedDay={selectedDay}
       />
       <div className={showEntireMonth ? "showEntireMonth" : "showWeek"}>
         {showEntireMonth && <DayNames weekDaysName={weekDaysName} />}

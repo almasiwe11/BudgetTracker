@@ -13,14 +13,15 @@ const DayCell = ({
   const nameDay = format(day, "EE");
   let selected = false;
   let wrongMonth = false;
-  if (!isSameMonth(today, day) || isFuture(day)) wrongMonth = true;
+  if (!isSameMonth(selectedDay, day) || isFuture(day)) wrongMonth = true;
   if (isSameDay(selectedDay, day) && !isSameDay(selectedDay, new Date()))
     selected = true;
   let markToday;
   if (isSameDay(new Date(), day)) markToday = true;
 
   function handleClick() {
-    if (!isFuture(day)) setSelectedDay(day);
+    if (isFuture(day)) return;
+    setSelectedDay(day);
     showEntireMonth && setShowEntireMonth(false);
   }
   return (
