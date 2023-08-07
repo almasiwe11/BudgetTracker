@@ -1,0 +1,39 @@
+select {
+  padding: 0.4rem;
+  border-radius: 5px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+input {
+  padding: 0.4rem;
+  border-radius: 5px;
+  &:focus {
+    outline: none;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.three-inputs {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: min-content 1fr max-content;
+}
+
+.four-inputs {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: min-content 6rem 1fr 6rem;
+}

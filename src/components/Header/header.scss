@@ -44,14 +44,13 @@
 }
 
 .dateMonth {
-  width: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
+  color: var(--color-grey-light);
+  font-size: 1.4rem;
 }
 
 .goBack {
@@ -64,6 +63,7 @@
 
 .rightHeader {
   display: flex;
+  justify-content: end;
   gap: 5rem;
 }
 .wallet-icon {
@@ -76,4 +76,7 @@
   display: flex;
   align-items: center;
   gap: 0.3rem;
+  color: var(--color-grey-light);
+  font-weight: 600;
+  font-size: 1.2rem;
 }

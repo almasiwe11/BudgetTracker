@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CalendarGrid from "./components/CalendarGrid/CalendarGrid";
-import Body from "./components/Body/Body";
+import Tracker from "./components/Tracker/Tracker";
 import AllApps from "./components/AllApps/AllApps";
 import Header from "./components//Header/Header";
 import { isFuture, sub, add, startOfWeek } from "date-fns";
@@ -51,7 +51,7 @@ function App() {
         handleNext={handleNext}
         handlePrev={handlePrev}
       />
-      <Body selectedDay={selectedDay} />
+      <Tracker selectedDay={selectedDay} />
     </div>
   );
 }

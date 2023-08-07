@@ -15,21 +15,11 @@
 }
 
 .calendarGrid {
-  width: 50%;
-  margin: auto;
   text-align: center;
   background-color: var(--color-background-900);
   display: flex;
   flex-direction: column;
   position: relative;
-}
-
-.calendarGrid button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 1.4rem;
-  color: orange;
 }
 
 .btnMonth {

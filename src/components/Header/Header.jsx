@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import Logo from "./Logo/Logo";
 import Date from "./Date/DateMonth";
-import ToggleView from "./ToggleView/ToggleView";
 
 import { Wallet } from "./Wallet/Wallet";
 

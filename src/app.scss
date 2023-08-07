@@ -1,16 +1,32 @@
 .app {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  grid-template-rows: 8vh 85vh 7vh;
+  grid-template-rows: 8vh min-content 1fr 7vh;
+  width: 95%;
+  margin: 0 auto;
 }
 
 .logo {
-  background-color: yellow;
   grid-column: 1/2;
+  position: relative;
+  top: 0.5rem;
 }
 
 .dateMonth {
   grid-column: 2/3;
-  background-color: blueviolet;
-  grid-row: 1/2;
+}
+
+.calendarGrid {
+  grid-column: 2/3;
+}
+
+.tracker {
+  grid-row: 3/4;
+  grid-column: 2/3;
+  color: white;
+  padding: 1.5rem 0 0 0;
+}
+
+.allApps {
+  grid-row: 4/5;
 }
