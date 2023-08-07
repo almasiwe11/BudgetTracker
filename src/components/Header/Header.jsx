@@ -17,7 +17,7 @@ const Header = ({
   setToday,
 }) => {
   return (
-    <div className="header">
+    <>
       <Logo />
       <Date
         setSelectedDay={setSelectedDay}
@@ -30,7 +30,7 @@ const Header = ({
         setShowEntireMonth={setShowEntireMonth}
       />
       <Wallet />
-    </div>
+    </>
   );
 };
 

@@ -64,7 +64,7 @@
   cursor: pointer;
 }
 
-.header {
+/* .header {
   color: var(--color-grey-light);
   height: 3.5rem;
   display: flex;
@@ -76,8 +76,7 @@
   padding: 0 4%;
   padding-top: 1%;
   margin-bottom: 0.5rem;
-}
-
+} */
 .toggleView {
   position: absolute;
   right: 3.5%;
@@ -167,6 +166,23 @@
   fill: #16a34a;
   height: 45px;
   width: 45px;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 8vh 85vh 7vh;
+}
+
+.logo {
+  background-color: yellow;
+  grid-column: 1/2;
+}
+
+.dateMonth {
+  grid-column: 2/3;
+  background-color: blueviolet;
+  grid-row: 1/2;
 }
 
 :root {

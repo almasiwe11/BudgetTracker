@@ -1,3 +1,16 @@
-.app{
-  
+.app {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 8vh 85vh 7vh;
+}
+
+.logo {
+  background-color: yellow;
+  grid-column: 1/2;
+}
+
+.dateMonth {
+  grid-column: 2/3;
+  background-color: blueviolet;
+  grid-row: 1/2;
 }
