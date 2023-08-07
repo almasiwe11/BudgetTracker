@@ -1,7 +1,8 @@
 @use "./src/components/CalendarGrid/DayCell/dayCell.scss";
 @use "./src/components/CalendarGrid/calendarGrid.scss";
-@use "./src/components/CalendarGrid/Header/header.scss";
+@use "./src/components/Header/header.scss";
 @use "./src/components/AllApps/allApps.scss";
+@use "./src/app.scss";
 
 @import url("https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;500;600;700;800&family=Dancing+Script:wght@700&family=Inter:wght@400;600&display=swap");
 :root {
@@ -46,11 +47,4 @@ body {
 h1 {
   font-family: "Dancing Script", cursive;
   color: var(--color-green);
-}
-
-.logo {
-  position: absolute;
-  left: 3%;
-  top: 3%;
-  font-size: 3rem;
 }

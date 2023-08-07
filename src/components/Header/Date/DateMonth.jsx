@@ -7,6 +7,7 @@ import { AiFillLeftCircle } from "react-icons/ai";
 import { AiFillRightCircle } from "react-icons/ai";
 import { AiOutlineRightCircle } from "react-icons/ai";
 import { VscDebugStepBack } from "react-icons/vsc";
+import ToggleView from "../ToggleView/ToggleView";
 
 const DateMonth = ({
   setSelectedDay,
@@ -16,22 +17,21 @@ const DateMonth = ({
   handleNext,
   showEntireMonth,
   disabled,
+  setShowEntireMonth,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isHoveredRight, setIsHoveredRight] = useState(false);
   let goBack = false;
   const formatted = format(selectedDay, "MMMM y");
 
-  const theDay = new Date();
-
-  if (!isSameWeek(selectedDay, theDay, { weekStartsOn: 1 })) goBack = true;
+  if (!isSameWeek(selectedDay, new Date(), { weekStartsOn: 1 })) goBack = true;
 
   function handleBack() {
     setSelectedDay(new Date());
     setToday(new Date());
   }
   return (
-    <div>
+    <div className="dateMonth">
       {isHovered ? (
         <AiFillLeftCircle
           className={showEntireMonth ? "btnWeek" : "hide"}
@@ -60,7 +60,11 @@ const DateMonth = ({
           onMouseEnter={() => setIsHoveredRight(true)}
         />
       )}
-      {goBack && <VscDebugStepBack onClick={handleBack} />}
+      {goBack && <VscDebugStepBack onClick={handleBack} className="goBack" />}
+      <ToggleView
+        showEntireMonth={showEntireMonth}
+        setShowEntireMonth={setShowEntireMonth}
+      />
     </div>
   );
 };

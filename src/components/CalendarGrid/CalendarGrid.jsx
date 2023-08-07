@@ -15,7 +15,6 @@ import {
   isSameDay,
 } from "date-fns";
 import DayCell from "./DayCell/DayCell";
-import Header from "./Header/Header";
 import DayNames from "./DayNames/DayNames";
 const CalendarGrid = ({
   today,

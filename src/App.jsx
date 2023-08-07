@@ -2,8 +2,8 @@ import { useState } from "react";
 import CalendarGrid from "./components/CalendarGrid/CalendarGrid";
 import Body from "./components/Body/Body";
 import AllApps from "./components/AllApps/AllApps";
-import Header from "./components/CalendarGrid/Header/Header";
-import { isFuture, isSameDay, sub, add, startOfWeek } from "date-fns";
+import Header from "./components//Header/Header";
+import { isFuture, sub, add, startOfWeek } from "date-fns";
 function App() {
   const [today, setToday] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(today);
