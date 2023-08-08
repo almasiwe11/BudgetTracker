@@ -68,10 +68,3 @@ input[type="number"] {
 .red {
   color: var(--color-red);
 }
-
-input[type="text"]:read-only {
-  background-color: transparent;
-}
-
-select:disabled {
-}

@@ -30,15 +30,14 @@ const Tracker = ({ selectedDay }) => {
     <div className="tracker">
       <div className="selected-date">{selectedD}</div>
       {selectedList.map((track, index) => (
-        <Inputs
+        <Track
           key={index}
-          spentStorage={track.spent}
-          gainedStorage={track.gained}
-          descriptionStorage={track.description}
-          toWhoStorage={track.toWho}
-          amountStorage={track.amount}
+          spent={track.spent}
+          gained={track.gained}
+          description={track.description}
+          toWho={track.toWho}
+          amount={track.amount}
           type={track.type}
-          disabled={true}
         />
       ))}
       {addBudget && (

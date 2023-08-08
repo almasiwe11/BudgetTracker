@@ -236,10 +236,6 @@ input[type=number] {
   color: var(--color-red);
 }
 
-input[type=text]:read-only {
-  background-color: transparent;
-}
-
 .allApps {
   display: flex;
   position: fixed;

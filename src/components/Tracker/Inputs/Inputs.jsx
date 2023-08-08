@@ -2,23 +2,12 @@ import React, { useState } from "react";
 import Gained from "../Gained/Gained";
 import Spent from "../Spent/Spent";
 
-const Inputs = ({
-  type,
-  setTrackList,
-  setAddBudget,
-  selectedDay,
-  spentStorage = "Needs",
-  gainedStorage = "Salary",
-  descriptionStorage = "",
-  toWhoStorage = "",
-  amountStorage = "",
-  disabled = false,
-}) => {
-  const [spent, setSpent] = useState(spentStorage);
-  const [gained, setGained] = useState(gainedStorage);
-  const [amount, setAmount] = useState(amountStorage);
-  const [description, setDescription] = useState(descriptionStorage);
-  const [toWho, setToWho] = useState(toWhoStorage);
+const Inputs = ({ type, setTrackList, setAddBudget, selectedDay }) => {
+  const [spent, setSpent] = useState("Needs");
+  const [gained, setGained] = useState("Salary");
+  const [amount, setAmount] = useState("");
+  const [description, setDescription] = useState("");
+  const [toWho, setToWho] = useState("");
 
   let owing;
   if (spent === "Owing") owing = true;
@@ -32,47 +21,30 @@ const Inputs = ({
 
   function handleSubmit(e) {
     e.preventDefault();
-    const data = {
-      type,
-      amount,
-      description,
-      selectedDay,
-    };
-
-    if (type === "gain") {
-      data.gained = gained;
-    } else {
-      data.spent = spent;
-    }
-
-    if (toWho) data.toWho = toWho;
-
-    setTrackList((prev) => [...prev, data]);
+    setTrackList((prev) => [
+      ...prev,
+      toWho
+        ? { spent, toWho, amount, description, type, selectedDay, gained }
+        : { spent, amount, description, type, selectedDay, gained },
+    ]);
     setAddBudget(false);
   }
-
-  const readOnlyInput = {
-    width: description && `${description.length * 8}px `,
-    padding: "0",
-  };
 
   function handleEnter(e) {
     if (e.key === "Enter") {
       handleSubmit(e);
     }
   }
-  // {}
+
   return (
     <form
       onSubmit={handleSubmit}
-      className={`inputs ${
-        disabled ? "disabled" : owing ? "four-inputs" : "three-inputs"
-      }`}
+      className={`inputs ${owing ? "four-inputs" : "three-inputs"}`}
     >
       {type === "gain" ? (
-        <Gained gained={gained} setGained={setGained} disabled={disabled} />
+        <Gained gained={gained} setGained={setGained} />
       ) : (
-        <Spent spent={spent} setSpent={setSpent} disabled={disabled} />
+        <Spent spent={spent} setSpent={setSpent} />
       )}
 
       {owing && (
@@ -82,7 +54,6 @@ const Inputs = ({
           placeholder="Stop owing money"
           value={toWho}
           onChange={(e) => setToWho(e.target.value)}
-          readOnly={disabled}
         />
       )}
       <input
@@ -91,8 +62,6 @@ const Inputs = ({
         placeholder="Enter the description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        readOnly={disabled}
-        // style={disabled && readOnlyInput}
       />
       <input
         className={`amount ${type === "gain" ? "gain" : "loss"}`}
@@ -101,7 +70,6 @@ const Inputs = ({
         value={amount}
         onChange={handleAmount}
         onKeyDown={handleEnter}
-        readOnly={disabled}
       />
     </form>
   );

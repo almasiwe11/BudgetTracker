@@ -1,6 +1,6 @@
 import React from "react";
 
-const Spent = ({ spent, setSpent, disabled }) => {
+const Spent = ({ spent, setSpent }) => {
   return (
     <select
       className={`spent loss`}
@@ -8,7 +8,6 @@ const Spent = ({ spent, setSpent, disabled }) => {
       id="spent"
       onChange={(e) => setSpent(e.target.value)}
       value={spent}
-      disabled={disabled}
     >
       <option value="Owing">Owing</option>
       <option value="Purchase">Purchase</option>

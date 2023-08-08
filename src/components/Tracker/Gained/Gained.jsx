@@ -1,6 +1,6 @@
 import React from "react";
 
-const Gained = ({ gained, setGained, disabled }) => {
+const Gained = ({ gained, setGained }) => {
   return (
     <select
       className={`gained gain `}
@@ -8,7 +8,6 @@ const Gained = ({ gained, setGained, disabled }) => {
       id="gained"
       onChange={(e) => setGained(e.target.value)}
       value={gained}
-      disabled={disabled}
     >
       <option value="Salary">Salary</option>
       <option value="Investment">Investment</option>
