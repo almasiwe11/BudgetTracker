@@ -1,14 +1,28 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import { NumericFormat } from "react-number-format";
 import Gained from "../Gained/Gained";
 import Spent from "../Spent/Spent";
 
-const Inputs = ({ type, setTrackList, setAddBudget, selectedDay, id }) => {
-  const [spent, setSpent] = useState("Needs");
-  const [gained, setGained] = useState("Salary");
-  const [amount, setAmount] = useState("");
-  const [description, setDescription] = useState("");
-  const [toWho, setToWho] = useState("");
+const Inputs = ({
+  type,
+  setTrackList,
+  setAddBudget,
+  selectedDay,
+  id,
+  spentStorage = "Needs",
+  gainedStorage = "Salary",
+  descriptionStorage = "",
+  toWhoStorage = "",
+  amountStorage = "",
+  idStorage,
+  disabled,
+}) => {
+  const [spent, setSpent] = useState(spentStorage);
+  const [gained, setGained] = useState(gainedStorage);
+  const [amount, setAmount] = useState(amountStorage);
+  const [description, setDescription] = useState(descriptionStorage);
+  const [toWho, setToWho] = useState(toWhoStorage);
 
   console.log(+amount + 300);
   let owing;
