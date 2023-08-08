@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import Gained from "../Gained/Gained";
+import Spent from "../Spent/Spent";
 
-const Inputs = ({ type, setTrackList, setAddBudget }) => {
+const Inputs = ({ type, setTrackList, setAddBudget, selectedDay }) => {
   const [spent, setSpent] = useState("Needs");
+  const [gained, setGained] = useState("Salary");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [toWho, setToWho] = useState("");
@@ -21,17 +24,10 @@ const Inputs = ({ type, setTrackList, setAddBudget }) => {
     setTrackList((prev) => [
       ...prev,
       toWho
-        ? { spent, toWho, amount, description }
-        : { spent, amount, description },
+        ? { spent, toWho, amount, description, type, selectedDay, gained }
+        : { spent, amount, description, type, selectedDay, gained },
     ]);
-    resetInputs();
-  }
-
-  function resetInputs() {
-    setSpent("Needs");
-    setAmount("");
-    setDescription("");
-    setToWho("");
+    setAddBudget(false);
   }
 
   function handleEnter(e) {
@@ -45,33 +41,15 @@ const Inputs = ({ type, setTrackList, setAddBudget }) => {
       onSubmit={handleSubmit}
       className={`inputs ${owing ? "four-inputs" : "three-inputs"}`}
     >
-      <select
-        className={`spent`}
-        name="spent"
-        id="spent"
-        onChange={(e) => setSpent(e.target.value)}
-        value={spent}
-      >
-        <option value="Owing">Owing</option>
-        <option value="Purchase">Purchase</option>
-        <option value="Education">Education</option>
-        <option value="Needs">Needs</option>
-        <option value="Shopping">Shopping</option>
-        <option value="Car">Car</option>
-        <option value="Entertainment">Entertainment</option>
-        <option value="Relationship">Relationship</option>
-        <option value="Family">Family</option>
-        <option value="Friendship">Friendship</option>
-        <option value="Going Out">Going</option>
-        <option value="Travel">Travel</option>
-        <option value="Healthcare">Healthcare</option>
-        <option value="Investment">Investment</option>
-        <option value="Other">Other</option>
-      </select>
+      {type === "gain" ? (
+        <Gained gained={gained} setGained={setGained} />
+      ) : (
+        <Spent spent={spent} setSpent={setSpent} />
+      )}
 
       {owing && (
         <input
-          className={`to-who `}
+          className={`to-who ${type === "gain" ? "gain" : "loss"} `}
           type="text"
           placeholder="Stop owing money"
           value={toWho}
@@ -79,14 +57,14 @@ const Inputs = ({ type, setTrackList, setAddBudget }) => {
         />
       )}
       <input
-        className={`description `}
+        className={`description ${type === "gain" ? "gain" : "loss"} `}
         type="text"
         placeholder="Enter the description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
       <input
-        className={`amount`}
+        className={`amount ${type === "gain" ? "gain" : "loss"}`}
         type="text"
         placeholder="Amount"
         value={amount}

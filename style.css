@@ -218,6 +218,24 @@ input[type=number] {
   gap: 1rem;
 }
 
+.gain {
+  border: 1px solid var(--color-green);
+  color: var(--color-green);
+}
+
+.loss {
+  border: 1px solid var(--color-red);
+  color: var(--color-red);
+}
+
+.green {
+  color: var(--color-green);
+}
+
+.red {
+  color: var(--color-red);
+}
+
 .allApps {
   display: flex;
   position: fixed;
