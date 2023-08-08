@@ -6,9 +6,9 @@ const GainLoss = ({ setAddBudget }) => {
     <div className="gain-loss">
       <FcMoneyTransfer
         className="paycheck"
-        onClick={() => setAddBudget(true)}
+        onClick={() => setAddBudget("gain")}
       />
-      <GiPayMoney className="spendMoney" onClick={() => setAddBudget(true)} />
+      <GiPayMoney className="spendMoney" onClick={() => setAddBudget("loss")} />
     </div>
   );
 };

@@ -29,11 +29,24 @@ input[type="number"] {
 .three-inputs {
   display: grid;
   gap: 0.5rem;
-  grid-template-columns: min-content 1fr max-content;
+  grid-template-columns: min-content 1fr max-content 2rem;
 }
 
 .four-inputs {
   display: grid;
   gap: 0.5rem;
-  grid-template-columns: min-content 6rem 1fr 6rem;
+  grid-template-columns: min-content 6rem 1fr 6rem 2rem;
+}
+
+.readOnly {
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+  outline: none;
+  color: red;
+}
+
+.track {
+  display: flex;
+  gap: 1rem;
 }

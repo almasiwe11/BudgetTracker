@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 
-const Inputs = () => {
-  const [type, setType] = useState("Needs");
+const Inputs = ({ type, setTrackList, setAddBudget }) => {
+  const [spent, setSpent] = useState("Needs");
   const [amount, setAmount] = useState("");
+  const [description, setDescription] = useState("");
+  const [toWho, setToWho] = useState("");
 
   let owing;
-  if (type === "Owing") owing = true;
+  if (spent === "Owing") owing = true;
 
   function handleAmount(e) {
     let value = e.target.value;
@@ -14,14 +16,41 @@ const Inputs = () => {
     setAmount(value);
   }
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    setTrackList((prev) => [
+      ...prev,
+      toWho
+        ? { spent, toWho, amount, description }
+        : { spent, amount, description },
+    ]);
+    resetInputs();
+  }
+
+  function resetInputs() {
+    setSpent("Needs");
+    setAmount("");
+    setDescription("");
+    setToWho("");
+  }
+
+  function handleEnter(e) {
+    if (e.key === "Enter") {
+      handleSubmit(e);
+    }
+  }
+
   return (
-    <div className={`inputs ${owing ? "four-inputs" : "three-inputs"}`}>
+    <form
+      onSubmit={handleSubmit}
+      className={`inputs ${owing ? "four-inputs" : "three-inputs"}`}
+    >
       <select
-        className="type"
-        name="type"
-        id="type"
-        onChange={(e) => setType(e.target.value)}
-        value={type}
+        className={`spent`}
+        name="spent"
+        id="spent"
+        onChange={(e) => setSpent(e.target.value)}
+        value={spent}
       >
         <option value="Owing">Owing</option>
         <option value="Purchase">Purchase</option>
@@ -41,21 +70,30 @@ const Inputs = () => {
       </select>
 
       {owing && (
-        <input className="to-who" type="text" placeholder="Stop owing money" />
+        <input
+          className={`to-who `}
+          type="text"
+          placeholder="Stop owing money"
+          value={toWho}
+          onChange={(e) => setToWho(e.target.value)}
+        />
       )}
       <input
-        className="description"
+        className={`description `}
         type="text"
         placeholder="Enter the description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
       />
       <input
-        className="amount"
+        className={`amount`}
         type="text"
         placeholder="Amount"
         value={amount}
         onChange={handleAmount}
+        onKeyDown={handleEnter}
       />
-    </div>
+    </form>
   );
 };
 
