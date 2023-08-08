@@ -64,7 +64,11 @@
 .rightHeader {
   display: flex;
   justify-content: end;
-  gap: 5rem;
+  gap: 2rem;
+
+  & > * {
+    // border: 1px solid red;
+  }
 }
 .wallet-icon {
   fill: var(--color-green);
@@ -78,5 +82,5 @@
   gap: 0.3rem;
   color: var(--color-grey-light);
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 0, 8rem;
 }

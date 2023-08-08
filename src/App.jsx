@@ -8,6 +8,10 @@ function App() {
   const [today, setToday] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(today);
 
+  const [trackList, setTrackList] = useState(
+    JSON.parse(localStorage.getItem("trackList")) || []
+  );
+
   const [showEntireMonth, setShowEntireMonth] = useState(false);
   function handlePrev() {
     if (showEntireMonth) {
@@ -38,6 +42,7 @@ function App() {
         selectedDay={selectedDay}
         setSelectedDay={setSelectedDay}
         setToday={setToday}
+        trackList={trackList}
       />
       <AllApps />
       <CalendarGrid
@@ -51,7 +56,11 @@ function App() {
         handleNext={handleNext}
         handlePrev={handlePrev}
       />
-      <Tracker selectedDay={selectedDay} />
+      <Tracker
+        selectedDay={selectedDay}
+        trackList={trackList}
+        setTrackList={setTrackList}
+      />
     </div>
   );
 }

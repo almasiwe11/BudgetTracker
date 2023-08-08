@@ -12,6 +12,7 @@ const Spent = ({ spent, setSpent }) => {
       <option value="Owing">Owing</option>
       <option value="Purchase">Purchase</option>
       <option value="Education">Education</option>
+      <option value="Subscription">Subscription</option>
       <option value="Needs">Needs</option>
       <option value="Shopping">Shopping</option>
       <option value="Car">Car</option>

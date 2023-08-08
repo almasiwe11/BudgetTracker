@@ -1,14 +1,16 @@
 import React, { useState } from "react";
+import { NumericFormat } from "react-number-format";
 import Gained from "../Gained/Gained";
 import Spent from "../Spent/Spent";
 
-const Inputs = ({ type, setTrackList, setAddBudget, selectedDay }) => {
+const Inputs = ({ type, setTrackList, setAddBudget, selectedDay, id }) => {
   const [spent, setSpent] = useState("Needs");
   const [gained, setGained] = useState("Salary");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [toWho, setToWho] = useState("");
 
+  console.log(+amount + 300);
   let owing;
   if (spent === "Owing") owing = true;
 
@@ -24,8 +26,8 @@ const Inputs = ({ type, setTrackList, setAddBudget, selectedDay }) => {
     setTrackList((prev) => [
       ...prev,
       toWho
-        ? { spent, toWho, amount, description, type, selectedDay, gained }
-        : { spent, amount, description, type, selectedDay, gained },
+        ? { id, spent, toWho, amount, description, type, selectedDay, gained }
+        : { id, spent, amount, description, type, selectedDay, gained },
     ]);
     setAddBudget(false);
   }
@@ -63,10 +65,10 @@ const Inputs = ({ type, setTrackList, setAddBudget, selectedDay }) => {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
-      <input
+      <NumericFormat
         className={`amount ${type === "gain" ? "gain" : "loss"}`}
-        type="text"
         placeholder="Amount"
+        thousandSeparator
         value={amount}
         onChange={handleAmount}
         onKeyDown={handleEnter}

@@ -119,8 +119,9 @@
 .rightHeader {
   display: flex;
   justify-content: end;
-  gap: 2rem;
+  gap: 5rem;
 }
+
 .wallet-icon {
   fill: var(--color-green);
   height: 32px;
@@ -133,7 +134,7 @@
   gap: 0.3rem;
   color: var(--color-grey-light);
   font-weight: 600;
-  font-size: 0, 8rem;
+  font-size: 1.2rem;
 }
 
 .tracker {
@@ -219,7 +220,7 @@ input[type=number] {
 }
 
 .delete {
-  cursor: pointer;
+  border: 2px solid blue;
 }
 
 .gain {
@@ -339,4 +340,4 @@ h1 {
   color: var(--color-green);
 }
 
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=sytle.css.map */

@@ -14,6 +14,7 @@ const Header = ({
   selectedDay,
   setSelectedDay,
   setToday,
+  trackList = { trackList },
 }) => {
   return (
     <>
@@ -28,7 +29,7 @@ const Header = ({
         disabled={disabled}
         setShowEntireMonth={setShowEntireMonth}
       />
-      <Wallet />
+      <Wallet trackList={trackList} />
     </>
   );
 };

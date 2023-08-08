@@ -1,25 +1,21 @@
 import React, { useState, useEffect } from "react";
+import { nanoid } from "nanoid";
 import Inputs from "./Inputs/Inputs";
 import { format, isSameDay, parseJSON } from "date-fns";
 import Track from "./Track/Track";
-
 import GainLoss from "./GainLoss/GainLoss";
-const Tracker = ({ selectedDay }) => {
+const Tracker = ({ selectedDay, trackList, setTrackList }) => {
   const [addBudget, setAddBudget] = useState(false);
-  const [trackList, setTrackList] = useState(
-    JSON.parse(localStorage.getItem("trackList")) || []
-  );
+
   const selectedD = format(selectedDay, "do LLLL");
 
   useEffect(() => {
     const fromStorage = JSON.parse(localStorage.getItem("trackList")) || [];
-    console.log(fromStorage, "fromStorage");
     setTrackList(fromStorage);
   }, []);
 
   useEffect(() => {
     localStorage.setItem("trackList", JSON.stringify(trackList));
-    console.log(trackList, "trackList");
   }, [trackList]);
 
   const selectedList = trackList.filter((track) =>
@@ -38,6 +34,9 @@ const Tracker = ({ selectedDay }) => {
           toWho={track.toWho}
           amount={track.amount}
           type={track.type}
+          trackList={trackList}
+          setTrackList={setTrackList}
+          id={track.id}
         />
       ))}
       {addBudget && (
@@ -46,6 +45,7 @@ const Tracker = ({ selectedDay }) => {
           setAddBudget={setAddBudget}
           setTrackList={setTrackList}
           selectedDay={selectedDay}
+          id={nanoid()}
         />
       )}
       <GainLoss setAddBudget={setAddBudget} />
