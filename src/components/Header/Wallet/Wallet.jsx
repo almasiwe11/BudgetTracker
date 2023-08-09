@@ -6,7 +6,7 @@ import { BsFillCalendarMonthFill } from "react-icons/bs";
 import { NumericFormat } from "react-number-format";
 import { isSameMonth, parseJSON, isSameDay } from "date-fns";
 
-export const Wallet = ({ trackList, initialBank }) => {
+const Wallet = ({ trackList, initialBank }) => {
   const initialBudget = initialBank.replace(/[^\d.]/g, "");
   const total = trackList.reduce((acc, track) => {
     const amount = parseFloat(track.amount.replace(/[^\d.]/g, ""));
@@ -72,3 +72,5 @@ export const Wallet = ({ trackList, initialBank }) => {
     </div>
   );
 };
+
+export default Wallet;

@@ -5,20 +5,36 @@ const Ower = ({ owerTrackList, owerName }) => {
 
   const totalOwing = owerTrackList.reduce((acc, owing) => {
     const amount = parseFloat(owing.amount.replace(/[^\d.]/g, ""));
-    return acc + Number(amount);
+    if (owing.spent === "Owing") {
+      return acc + Number(amount);
+    } else if (owing.gained === "Return") {
+      return acc - Number(amount);
+    }
   }, 0);
 
   return (
     <ul className="ower" onClick={() => setShowDetails((prev) => !prev)}>
       {owerName} {totalOwing.toLocaleString()}
       {showDetails &&
-        owerTrackList.map((owing) => (
-          <li key={owing.id}>
-            {`
+        owerTrackList.map((owing) => {
+          let style;
+          if (owing.spent === "Owing") {
+            style = {
+              color: "#dc2626",
+            };
+          } else if (owing.gained === "Return") {
+            style = {
+              color: "#16a34a",
+            };
+          }
+          return (
+            <li key={owing.id} style={style}>
+              {`
             ${format(parseJSON(owing.selectedDay), "PPP")} - ${owing.amount}
             `}
-          </li>
-        ))}
+            </li>
+          );
+        })}
     </ul>
   );
 };

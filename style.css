@@ -346,6 +346,13 @@ input[type=number] {
   grid-row: 3/4;
 }
 
+.stats {
+  grid-column: 3/4;
+  grid-row: 3/4;
+  color: var(--color-grey-light);
+  padding-left: 1.8rem;
+}
+
 :root {
   --color-black-1: #1e1f21;
   --color-grey-1: #404040;

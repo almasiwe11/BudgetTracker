@@ -4,6 +4,7 @@ import Tracker from "./components/Tracker/Tracker";
 import AllApps from "./components/AllApps/AllApps";
 import Header from "./components//Header/Header";
 import Owers from "./components/Owers/Owers";
+import Stats from "./components/Stats/Stats";
 import InitialBank from "./components/InitialBank/InitialBank";
 import { isFuture, sub, add, startOfWeek } from "date-fns";
 function App() {
@@ -12,6 +13,7 @@ function App() {
   const [initialBank, setInitialBank] = useState(
     localStorage.getItem("Initial-bank") || ""
   );
+  const [showTracker, setShowTracker] = useState("Day-by-Day");
 
   const [trackList, setTrackList] = useState(
     JSON.parse(localStorage.getItem("trackList")) || []
@@ -72,6 +74,7 @@ function App() {
         setTrackList={setTrackList}
       />
       <Owers trackList={trackList} />
+      <Stats trackList={trackList} selectedDay={selectedDay} />
       {!initialBank && <InitialBank setInitialBank={setInitialBank} />}
     </div>
   );

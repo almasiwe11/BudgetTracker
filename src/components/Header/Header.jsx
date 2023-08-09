@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Logo from "./Logo/Logo";
 import Date from "./Date/DateMonth";
 
-import { Wallet } from "./Wallet/Wallet";
+import Wallet from "./Wallet/Wallet";
 
 const Header = ({
   showEntireMonth,
