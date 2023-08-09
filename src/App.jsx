@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CalendarGrid from "./components/CalendarGrid/CalendarGrid";
 import Tracker from "./components/Tracker/Tracker";
 import AllApps from "./components/AllApps/AllApps";
 import Header from "./components//Header/Header";
+import InitialBank from "./components/InitialBank/InitialBank";
 import { isFuture, sub, add, startOfWeek } from "date-fns";
 function App() {
   const [today, setToday] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(today);
+  const [initialBank, setInitialBank] = useState(
+    localStorage.getItem("Initial-bank") || ""
+  );
 
   const [trackList, setTrackList] = useState(
     JSON.parse(localStorage.getItem("trackList")) || []
@@ -28,6 +32,10 @@ function App() {
     }
   }
 
+  /* useEffect(() => {
+    const initial = localStorage.getItem("Initial-bank");
+  }, []); */
+
   let disabled = true;
   if (!isFuture(add(startOfWeek(today), { weeks: 1 }))) disabled = false;
 
@@ -43,6 +51,7 @@ function App() {
         setSelectedDay={setSelectedDay}
         setToday={setToday}
         trackList={trackList}
+        initialBank={initialBank}
       />
       <AllApps />
       <CalendarGrid
@@ -61,6 +70,7 @@ function App() {
         trackList={trackList}
         setTrackList={setTrackList}
       />
+      {!initialBank && <InitialBank setInitialBank={setInitialBank} />}
     </div>
   );
 }

@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import { set } from "date-fns";
-import React from "react";
+import React, { useState } from "react";
 import { RiDeleteBin6Fill } from "react-icons/ri";
+import Inputs from "../Inputs/Inputs";
 
 const Track = ({
   spent,
@@ -12,19 +13,71 @@ const Track = ({
   gained,
   id,
   setTrackList,
+  selectedDay,
 }) => {
+  const [editing, setEditing] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
   function handleDelete(id) {
     setTrackList((prev) => prev.filter((track) => track.id !== id));
   }
+
   return (
-    <div className={`track ${type === "gain" ? "green" : "red"}`}>
-      {type === "gain" ? <p>{gained}</p> : <p>{spent}</p>}
-      {toWho && <p>{toWho}</p>}
-      <p>{description}</p>
-      <p>{amount} tg</p>
-      <RiDeleteBin6Fill className="delete" onClick={() => handleDelete(id)} />
-    </div>
+    <>
+      {editing ? (
+        <Inputs
+          spentEditing={spent}
+          gainedEditing={gained}
+          descriptionEditing={description}
+          toWhoEditing={toWho}
+          amountEditing={amount}
+          type={type}
+          idEditing={id}
+          editing={editing}
+          setEditing={setEditing}
+          setTrackList={setTrackList}
+          selectedDay={selectedDay}
+        />
+      ) : (
+        <div
+          className={`track ${type === "gain" ? "green" : "red"}`}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          {type === "gain" ? <p>{gained}</p> : <p>{spent}</p>}
+          {toWho && <p>{toWho}</p>}
+          <p>{description}</p>
+          <p>{amount} tg</p>
+          {isHovered && (
+            <>
+              <RiDeleteBin6Fill
+                className="delete"
+                onClick={() => handleDelete(id)}
+              />
+              <button className="edit" onClick={() => setEditing(true)}>
+                Edit
+              </button>
+            </>
+          )}
+        </div>
+      )}
+    </>
   );
 };
 
 export default Track;
+
+/*   <Inputs
+     key={track.id}
+     spent={track.spent}
+     gained={track.gained}
+     description={track.description}
+     toWho={track.toWho}
+     amount={track.amount}
+     type={track.type}
+     trackList={trackList}
+     setTrackList={setTrackList}
+     id={track.id}
+     editing={editing}
+     setEditing={setEditing}
+   />; */

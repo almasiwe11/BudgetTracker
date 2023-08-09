@@ -10,23 +10,23 @@ const Inputs = ({
   setAddBudget,
   selectedDay,
   id,
-  spentStorage = "Needs",
-  gainedStorage = "Salary",
-  descriptionStorage = "",
-  toWhoStorage = "",
-  amountStorage = "",
-  idStorage,
-  disabled,
+  spentEditing = "Needs",
+  gainedEditing = "Salary",
+  descriptionEditing = "",
+  toWhoEditing = "",
+  amountEditing = "",
+  editing,
+  setEditing,
+  idEditing,
 }) => {
-  const [spent, setSpent] = useState(spentStorage);
-  const [gained, setGained] = useState(gainedStorage);
-  const [amount, setAmount] = useState(amountStorage);
-  const [description, setDescription] = useState(descriptionStorage);
-  const [toWho, setToWho] = useState(toWhoStorage);
+  const [spent, setSpent] = useState(spentEditing);
+  const [gained, setGained] = useState(gainedEditing);
+  const [amount, setAmount] = useState(amountEditing);
+  const [description, setDescription] = useState(descriptionEditing);
+  const [toWho, setToWho] = useState(toWhoEditing);
 
-  console.log(+amount + 300);
   let owing;
-  if (spent === "Owing") owing = true;
+  if (spent === "Owing" || gained === "Return") owing = true;
 
   function handleAmount(e) {
     let value = e.target.value;
@@ -37,13 +37,49 @@ const Inputs = ({
 
   function handleSubmit(e) {
     e.preventDefault();
-    setTrackList((prev) => [
-      ...prev,
-      toWho
-        ? { id, spent, toWho, amount, description, type, selectedDay, gained }
-        : { id, spent, amount, description, type, selectedDay, gained },
-    ]);
-    setAddBudget(false);
+    if (editing) {
+      setTrackList((prev) =>
+        prev.map((track) => {
+          if (track.id === idEditing) {
+            let obj;
+            if (toWho) {
+              obj = {
+                id,
+                spent,
+                toWho,
+                amount,
+                description,
+                type,
+                selectedDay,
+                gained,
+              };
+            } else {
+              obj = {
+                id,
+                spent,
+                amount,
+                description,
+                type,
+                selectedDay,
+                gained,
+              };
+            }
+
+            return obj;
+          }
+          return track;
+        })
+      );
+      setEditing(false);
+    } else {
+      setTrackList((prev) => [
+        ...prev,
+        toWho
+          ? { id, spent, toWho, amount, description, type, selectedDay, gained }
+          : { id, spent, amount, description, type, selectedDay, gained },
+      ]);
+      setAddBudget(false);
+    }
   }
 
   function handleEnter(e) {
@@ -67,7 +103,9 @@ const Inputs = ({
         <input
           className={`to-who ${type === "gain" ? "gain" : "loss"} `}
           type="text"
-          placeholder="Stop owing money"
+          placeholder={
+            spent === "Owing" ? "Stop Owing money!" : "Who Gave Back"
+          }
           value={toWho}
           onChange={(e) => setToWho(e.target.value)}
         />
