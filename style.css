@@ -145,7 +145,15 @@
 .selected-date {
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 3rem;
   font-size: 1.4rem;
+}
+.selected-date span {
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .gain-loss {
@@ -163,6 +171,42 @@
 
 .spendMoney {
   fill: var(--color-red);
+}
+
+input[type=radio] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 0.6rem;
+  height: 0.6rem;
+  outline: none;
+  font-size: 0.4rem;
+  background-color: var(--color-grey-light);
+  position: relative;
+}
+
+input[type=radio]:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.8rem;
+  height: 0.8rem;
+  background-color: var(--color-green);
+  border-radius: 50%;
+}
+
+input[type=radio]:checked {
+  background-color: var(--color-border);
+}
+
+.day-by-day,
+.monthTracker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 1.2rem;
 }
 
 select {

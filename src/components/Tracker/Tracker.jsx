@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import Inputs from "./Inputs/Inputs";
-import { format, isSameDay, parseJSON } from "date-fns";
+import { format, isSameDay, parseJSON, isSameMonth } from "date-fns";
 import Track from "./Track/Track";
 import GainLoss from "./GainLoss/GainLoss";
+import DayByDay from "./DayByDay/DayByDay";
+import MonthTracker from "./MonthTracker/MonthTracker";
 const Tracker = ({ selectedDay, trackList, setTrackList }) => {
   const [addBudget, setAddBudget] = useState(false);
+  const [trackEntireMonth, setTrackEntireMonth] = useState(false);
 
-  const selectedD = format(selectedDay, "do LLLL");
-
+  let selectedDate;
+  if (trackEntireMonth) {
+    selectedDate = format(selectedDay, "MMMM y");
+  } else {
+    selectedDate = format(selectedDay, "do LLLL");
+  }
   useEffect(() => {
     const fromStorage = JSON.parse(localStorage.getItem("trackList")) || [];
     setTrackList(fromStorage);
@@ -24,33 +31,35 @@ const Tracker = ({ selectedDay, trackList, setTrackList }) => {
 
   return (
     <div className="tracker">
-      <div className="selected-date">{selectedD}</div>
-      {selectedList.map((track) => (
-        <Track
-          key={track.id}
-          spent={track.spent}
-          gained={track.gained}
-          description={track.description}
-          toWho={track.toWho}
-          amount={track.amount}
-          type={track.type}
-          trackList={trackList}
-          setTrackList={setTrackList}
-          id={track.id}
-          disabled={true}
-          selectedDay={track.selectedDay}
+      <div className="selected-date">
+        {selectedDate}
+        <span>
+          <input
+            type="radio"
+            className="trackerForEntireMonth"
+            id="trackEntireMonth"
+            checked={trackEntireMonth}
+            onClick={() => setTrackEntireMonth((prev) => !prev)}
+          />
+          <label htmlFor={"trackEntireMonth"}>Entire Month</label>
+        </span>
+      </div>
+      {trackEntireMonth ? (
+        <MonthTracker
+          trackList={trackList.filter((track) =>
+            isSameMonth(selectedDay, parseJSON(track.selectedDay))
+          )}
         />
-      ))}
-      {addBudget && (
-        <Inputs
-          type={addBudget}
+      ) : (
+        <DayByDay
+          selectedList={selectedList}
+          addBudget={addBudget}
           setAddBudget={setAddBudget}
           setTrackList={setTrackList}
           selectedDay={selectedDay}
-          id={nanoid()}
+          trackList={trackList}
         />
       )}
-      <GainLoss setAddBudget={setAddBudget} />
     </div>
   );
 };
