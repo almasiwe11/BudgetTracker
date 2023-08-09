@@ -192,18 +192,6 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-.three-inputs {
-  display: grid;
-  gap: 0.5rem;
-  grid-template-columns: min-content 1fr max-content 2rem;
-}
-
-.four-inputs {
-  display: grid;
-  gap: 0.5rem;
-  grid-template-columns: min-content 6rem 1fr 6rem 2rem;
-}
-
 .readOnly {
   background-color: transparent;
   box-shadow: none;
@@ -250,6 +238,18 @@ input[type=number] {
   opacity: 0.7;
 }
 
+.inputs {
+  display: flex;
+}
+.inputs > * {
+  min-width: 10%;
+  width: 25%;
+}
+
+.description {
+  min-width: 50%;
+}
+
 .allApps {
   display: flex;
   position: fixed;
@@ -272,6 +272,19 @@ input[type=number] {
   fill: #16a34a;
   height: 45px;
   width: 45px;
+}
+
+.owers {
+  color: var(--color-red);
+  width: 85%;
+}
+
+.owers h2 {
+  text-align: center;
+}
+
+.ower {
+  cursor: pointer;
 }
 
 .app {
@@ -326,6 +339,11 @@ input[type=number] {
   border: none;
   background-color: white;
   padding: 0.5rem;
+}
+
+.owers {
+  grid-column: 1/2;
+  grid-row: 3/4;
 }
 
 :root {

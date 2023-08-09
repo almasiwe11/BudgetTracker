@@ -3,6 +3,7 @@ import CalendarGrid from "./components/CalendarGrid/CalendarGrid";
 import Tracker from "./components/Tracker/Tracker";
 import AllApps from "./components/AllApps/AllApps";
 import Header from "./components//Header/Header";
+import Owers from "./components/Owers/Owers";
 import InitialBank from "./components/InitialBank/InitialBank";
 import { isFuture, sub, add, startOfWeek } from "date-fns";
 function App() {
@@ -70,6 +71,7 @@ function App() {
         trackList={trackList}
         setTrackList={setTrackList}
       />
+      <Owers trackList={trackList} />
       {!initialBank && <InitialBank setInitialBank={setInitialBank} />}
     </div>
   );

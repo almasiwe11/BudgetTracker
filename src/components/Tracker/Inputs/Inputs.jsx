@@ -36,6 +36,10 @@ const Inputs = ({
   }
 
   function handleSubmit(e) {
+    if (!amount.length) {
+      setAddBudget(false);
+      return;
+    }
     e.preventDefault();
     if (editing) {
       setTrackList((prev) =>
@@ -89,23 +93,17 @@ const Inputs = ({
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={`inputs ${owing ? "four-inputs" : "three-inputs"}`}
-    >
+    <form onSubmit={handleSubmit} className={`inputs `}>
       {type === "gain" ? (
         <Gained gained={gained} setGained={setGained} />
       ) : (
         <Spent spent={spent} setSpent={setSpent} />
       )}
-
       {owing && (
         <input
           className={`to-who ${type === "gain" ? "gain" : "loss"} `}
           type="text"
-          placeholder={
-            spent === "Owing" ? "Stop Owing money!" : "Who Gave Back"
-          }
+          placeholder={spent === "Owing" ? "To Who" : "Who Gave Back"}
           value={toWho}
           onChange={(e) => setToWho(e.target.value)}
         />

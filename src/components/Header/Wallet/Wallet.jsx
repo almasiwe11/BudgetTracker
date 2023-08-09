@@ -19,9 +19,11 @@ export const Wallet = ({ trackList, initialBank }) => {
 
   const wallet = total + Number(initialBudget);
   const diff = wallet - Number(initialBudget);
-  const thisMonth = trackList.filter((track) =>
-    isSameMonth(parseJSON(track.selectedDay), new Date())
-  );
+  const thisMonthSpent = trackList
+    .filter((track) => isSameMonth(parseJSON(track.selectedDay), new Date()))
+    .filter((record) => record.type === "loss");
+
+  //
 
   function giveStyle(value) {
     if (value <= 0) {
@@ -39,7 +41,7 @@ export const Wallet = ({ trackList, initialBank }) => {
     }
   }
 
-  const monthChange = thisMonth.reduce((acc, track) => {
+  const monthSpent = thisMonthSpent.reduce((acc, track) => {
     const amount = parseFloat(track.amount.replace(/[^\d.]/g, ""));
     if (track.type === "gain") {
       return acc + Number(amount);
@@ -63,9 +65,9 @@ export const Wallet = ({ trackList, initialBank }) => {
       <div className="wallet">
         <BsFillCalendarMonthFill
           className="wallet-icon"
-          style={giveStyle(monthChange)}
+          style={giveStyle(monthSpent)}
         />
-        <span>{monthChange.toLocaleString()}</span>
+        <span>{monthSpent.toLocaleString()}</span>
       </div>
     </div>
   );
