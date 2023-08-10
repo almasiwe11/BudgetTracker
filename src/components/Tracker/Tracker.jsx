@@ -6,6 +6,8 @@ import Track from "./Track/Track";
 import GainLoss from "./GainLoss/GainLoss";
 import DayByDay from "./DayByDay/DayByDay";
 import MonthTracker from "./MonthTracker/MonthTracker";
+import { VscDebugStepBack } from "react-icons/vsc";
+
 const Tracker = ({
   selectedDay,
   trackList,
@@ -13,6 +15,8 @@ const Tracker = ({
   filterTracker,
   trackEntireMonth,
   setTrackEntireMonth,
+  setFilterTracker,
+  period,
 }) => {
   const [addBudget, setAddBudget] = useState(false);
 
@@ -49,14 +53,20 @@ const Tracker = ({
           />
           <label htmlFor={"trackEntireMonth"}>Entire Month</label>
         </span>
+        {filterTracker && trackEntireMonth && (
+          <VscDebugStepBack
+            className="resetFilter"
+            onClick={() => setFilterTracker(false)}
+          />
+        )}
       </div>
       {trackEntireMonth ? (
         <MonthTracker
-          trackList={trackList.filter((track) =>
-            isSameMonth(selectedDay, parseJSON(track.selectedDay))
-          )}
+          trackList={trackList}
           setTrackList={setTrackList}
           filterTracker={filterTracker}
+          period={period}
+          selectedDay={selectedDay}
         />
       ) : (
         <DayByDay

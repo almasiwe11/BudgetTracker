@@ -78,9 +78,16 @@ const Inputs = ({
     } else {
       setTrackList((prev) => [
         ...prev,
-        toWho
-          ? { id, spent, toWho, amount, description, type, selectedDay, gained }
-          : { id, spent, amount, description, type, selectedDay, gained },
+        {
+          id,
+          spent: type === "loss" ? spent : null,
+          toWho: toWho ? toWho : null,
+          amount,
+          description,
+          type,
+          selectedDay,
+          gained: type === "gain" ? gained : null,
+        },
       ]);
       setAddBudget(false);
     }

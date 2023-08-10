@@ -7,28 +7,31 @@ const Stats = ({
   selectedDay,
   setFilterTracker,
   setTrackEntireMonth,
+  period,
+  setPeriod,
 }) => {
-  const [period, setPeriod] = useState("Selected Month");
   const [display, setDisplay] = useState("Number");
   const formatted = format(selectedDay, "MMMM y");
+  let dataOfThePeriod;
 
-  let allLossesDuringPeriod;
-
-  const loss = trackList.filter((track) => track.type === "loss");
-  /*   const theMonthLoss = loss.filter((track) =>
-     isSameMonth(parseJSON(track.selectedDay), selectedDay)
-  ) */
   if (period === "Selected Month") {
-    allLossesDuringPeriod = loss.filter((track) =>
+    dataOfThePeriod = trackList.filter((track) =>
       isSameMonth(parseJSON(track.selectedDay), selectedDay)
     );
   } else if (period === "All Time") {
-    allLossesDuringPeriod = loss;
+    dataOfThePeriod = trackList;
   } else if (period === "This Year") {
-    allLossesDuringPeriod = loss.filter((track) =>
+    dataOfThePeriod = trackList.filter((track) =>
       isSameYear(parseJSON(track.selectedDay), selectedDay)
     );
   }
+  const allLossesDuringPeriod = dataOfThePeriod.filter(
+    (track) => track.type === "loss"
+  );
+
+  const moneyReturnDuringPeriod = dataOfThePeriod.filter(
+    (track) => track.gained === "Return"
+  );
 
   const spentTotalDuringPeriod = allLossesDuringPeriod.reduce((acc, spent) => {
     const amount = parseFloat(spent.amount.replace(/[^\d.]/g, ""));
@@ -53,6 +56,23 @@ const Stats = ({
       types.push(allLossesDuringPeriod[i].spent);
       expenditure.push(obj);
     }
+  }
+
+  let moneyBackTotal;
+  if (types.indexOf("Owing") !== -1) {
+    moneyBackTotal = moneyReturnDuringPeriod.reduce((acc, spent) => {
+      const amount = parseFloat(spent.amount.replace(/[^\d.]/g, ""));
+      return acc + Number(amount);
+    }, 0);
+
+    expenditure = expenditure.map((expend) => {
+      if (expend.type === "Owing") {
+        const newTotal = expend.totalSpent - moneyBackTotal;
+        return { ...expend, totalSpent: newTotal };
+      } else {
+        return expend;
+      }
+    });
   }
 
   function handleStat(type) {

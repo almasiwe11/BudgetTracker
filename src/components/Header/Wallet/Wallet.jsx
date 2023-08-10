@@ -17,11 +17,21 @@ const Wallet = ({ trackList, initialBank }) => {
     }
   }, 0);
 
+  const thisMonth = trackList.filter((track) =>
+    isSameMonth(parseJSON(track.selectedDay), new Date())
+  );
+
+  const thisMonthGained = thisMonth.filter((track) => track.type === "gain");
+  const monthGained = thisMonthGained.reduce((acc, track) => {
+    const amount = parseFloat(track.amount.replace(/[^\d.]/g, ""));
+    return acc + Number(amount);
+  }, 0);
+
+  const thisMonthSpent = thisMonth.filter(
+    (record) => record.type === "loss" || record.gained === "Return"
+  );
+
   const wallet = total + Number(initialBudget);
-  const diff = wallet - Number(initialBudget);
-  const thisMonthSpent = trackList
-    .filter((track) => isSameMonth(parseJSON(track.selectedDay), new Date()))
-    .filter((record) => record.type === "loss");
 
   //
 
@@ -49,6 +59,8 @@ const Wallet = ({ trackList, initialBank }) => {
       return acc - Number(amount);
     }
   }, 0);
+
+  const diff = monthGained + monthSpent;
 
   return (
     <div className="rightHeader">

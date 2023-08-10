@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useState } from "react";
 import { nanoid } from "nanoid";
 import Inputs from "../Inputs/Inputs";
 import Track from "../Track/Track";
 import GainLoss from "../GainLoss/GainLoss";
+import NextPage from "../../NextPage/NextPage";
 
 const DayByDay = ({
   trackList,
@@ -13,9 +14,16 @@ const DayByDay = ({
   setTrackList,
   selectedDay,
 }) => {
+  const [displayedItems, setDisplayedItems] = useState(selectedList);
+  let display;
+  if (selectedList.length > 1) {
+    display = displayedItems;
+  } else {
+    display = selectedList;
+  }
   return (
     <div className="day-by-day">
-      {selectedList.map((track) => (
+      {display.map((track) => (
         <Track
           key={track.id}
           spent={track.spent}
@@ -41,6 +49,12 @@ const DayByDay = ({
         />
       )}
       <GainLoss setAddBudget={setAddBudget} />
+      <NextPage
+        itemsPerPage={12}
+        array={selectedList}
+        setDisplayedItems={setDisplayedItems}
+        addBudget={addBudget}
+      />
     </div>
   );
 };

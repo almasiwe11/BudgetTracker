@@ -20,6 +20,7 @@ function App() {
     JSON.parse(localStorage.getItem("trackList")) || []
   );
   const [trackEntireMonth, setTrackEntireMonth] = useState(false);
+  const [period, setPeriod] = useState("Selected Month");
 
   const [showEntireMonth, setShowEntireMonth] = useState(false);
   function handlePrev() {
@@ -77,8 +78,10 @@ function App() {
         trackList={trackList}
         setTrackList={setTrackList}
         filterTracker={filterTracker}
+        setFilterTracker={setFilterTracker}
         trackEntireMonth={trackEntireMonth}
         setTrackEntireMonth={setTrackEntireMonth}
+        period={period}
       />
       <Owers trackList={trackList} />
       <Stats
@@ -86,6 +89,8 @@ function App() {
         selectedDay={selectedDay}
         setFilterTracker={setFilterTracker}
         setTrackEntireMonth={setTrackEntireMonth}
+        period={period}
+        setPeriod={setPeriod}
       />
       {!initialBank && <InitialBank setInitialBank={setInitialBank} />}
     </div>
