@@ -15,10 +15,11 @@ function App() {
   const [initialBank, setInitialBank] = useState(
     localStorage.getItem("Initial-bank") || ""
   );
-
+  const [filterTracker, setFilterTracker] = useState(false);
   const [trackList, setTrackList] = useState(
     JSON.parse(localStorage.getItem("trackList")) || []
   );
+  const [trackEntireMonth, setTrackEntireMonth] = useState(false);
 
   const [showEntireMonth, setShowEntireMonth] = useState(false);
   function handlePrev() {
@@ -75,9 +76,17 @@ function App() {
         selectedDay={selectedDay}
         trackList={trackList}
         setTrackList={setTrackList}
+        filterTracker={filterTracker}
+        trackEntireMonth={trackEntireMonth}
+        setTrackEntireMonth={setTrackEntireMonth}
       />
       <Owers trackList={trackList} />
-      <Stats trackList={trackList} selectedDay={selectedDay} />
+      <Stats
+        trackList={trackList}
+        selectedDay={selectedDay}
+        setFilterTracker={setFilterTracker}
+        setTrackEntireMonth={setTrackEntireMonth}
+      />
       {!initialBank && <InitialBank setInitialBank={setInitialBank} />}
     </div>
   );

@@ -14,11 +14,12 @@ const Spent = ({ spent, setSpent }) => {
       <option value="Education">Education</option>
       <option value="Subscription">Subscription</option>
       <option value="Needs">Needs</option>
+      <option value="Bills">Bills</option>
       <option value="Shopping">Shopping</option>
       <option value="Car">Car</option>
       <option value="Entertainment">Entertainment</option>
-      <option value="Entertainment">Fines</option>
-      <option value="Entertainment">Interest</option>
+      <option value="Fines">Fines</option>
+      <option value="Interest">Interest</option>
       <option value="Relationship">Relationship</option>
       <option value="Family">Family</option>
       <option value="Friendship">Friendship</option>

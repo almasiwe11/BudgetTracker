@@ -397,6 +397,10 @@ input[type=number] {
   padding-left: 1.8rem;
 }
 
+.stat {
+  cursor: pointer;
+}
+
 :root {
   --color-black-1: #1e1f21;
   --color-grey-1: #404040;

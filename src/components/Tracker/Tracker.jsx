@@ -6,9 +6,15 @@ import Track from "./Track/Track";
 import GainLoss from "./GainLoss/GainLoss";
 import DayByDay from "./DayByDay/DayByDay";
 import MonthTracker from "./MonthTracker/MonthTracker";
-const Tracker = ({ selectedDay, trackList, setTrackList }) => {
+const Tracker = ({
+  selectedDay,
+  trackList,
+  setTrackList,
+  filterTracker,
+  trackEntireMonth,
+  setTrackEntireMonth,
+}) => {
   const [addBudget, setAddBudget] = useState(false);
-  const [trackEntireMonth, setTrackEntireMonth] = useState(false);
 
   let selectedDate;
   if (trackEntireMonth) {
@@ -49,6 +55,8 @@ const Tracker = ({ selectedDay, trackList, setTrackList }) => {
           trackList={trackList.filter((track) =>
             isSameMonth(selectedDay, parseJSON(track.selectedDay))
           )}
+          setTrackList={setTrackList}
+          filterTracker={filterTracker}
         />
       ) : (
         <DayByDay

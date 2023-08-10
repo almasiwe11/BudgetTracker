@@ -2,7 +2,12 @@
 import React, { useState } from "react";
 import { isSameMonth, parseJSON, format, isSameYear } from "date-fns";
 
-const Stats = ({ trackList, selectedDay }) => {
+const Stats = ({
+  trackList,
+  selectedDay,
+  setFilterTracker,
+  setTrackEntireMonth,
+}) => {
   const [period, setPeriod] = useState("Selected Month");
   const [display, setDisplay] = useState("Number");
   const formatted = format(selectedDay, "MMMM y");
@@ -50,7 +55,10 @@ const Stats = ({ trackList, selectedDay }) => {
     }
   }
 
-  console.log(expenditure);
+  function handleStat(type) {
+    setFilterTracker(type);
+    setTrackEntireMonth(true);
+  }
 
   return (
     <div className="stats">
@@ -89,12 +97,12 @@ const Stats = ({ trackList, selectedDay }) => {
           } else {
             showSpentType = type.totalSpent.toLocaleString();
           }
-          /* 
-         type: allLossesDuringPeriod[i].spent,
-          totalSpent:totalSpentOn */
-
           return (
-            <li key={type.id}>
+            <li
+              key={type.id}
+              onClick={() => handleStat(type.type)}
+              className="stat"
+            >
               {type.type} {showSpentType}
             </li>
           );
