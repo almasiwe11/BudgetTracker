@@ -347,7 +347,7 @@ input[type=number] {
 
 .app {
   display: grid;
-  grid-template-columns: 1fr minmax(24rem 2fr) minmax(15rem 1fr);
+  grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: 8vh min-content 1fr 7vh;
   width: 95%;
   margin: 0 auto;
@@ -428,6 +428,41 @@ li {
   font-size: 1.3rem;
 }
 
+@media (max-width: 1227px) {
+  .app {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 8vh, min-content, min-content;
+    width: 95%;
+    margin: 0 auto;
+  }
+  .dateMonth {
+    grid-row: 2/3;
+  }
+  .calendarGrid {
+    grid-row: 3/4;
+  }
+  .tracker {
+    grid-row: 4/5;
+  }
+  .owers {
+    margin-top: 2rem;
+    grid-column: 1/2;
+    grid-row: 3/4;
+  }
+  .stats {
+    grid-column: 1/2;
+    grid-row: 4/5;
+    width: 100%;
+    text-align: start;
+  }
+  .rightHeader {
+    gap: 5%;
+  }
+  .stats__selected-month {
+    text-align: start;
+  }
+}
 :root {
   --color-black-1: #1e1f21;
   --color-grey-1: #404040;
