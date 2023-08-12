@@ -41,17 +41,18 @@ const Inputs = ({
       return;
     }
     e.preventDefault();
+    const number = parseFloat(amount.replace(/[^\d.]/g, ""));
     const obj = {
       id,
       spent: type === "loss" ? spent : null,
       toWho: toWho ? toWho : null,
-      amount,
+      amount: type === "loss" ? number * -1 : number,
       description,
       type,
       selectedDay,
       gained: type === "gain" ? gained : null,
     };
-
+    //  type === "loss" ? Number(amount) * -1 : amount,
     if (editing) {
       setTrackList((prev) =>
         prev.map((track) => {

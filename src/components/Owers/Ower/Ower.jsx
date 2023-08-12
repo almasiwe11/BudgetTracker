@@ -1,16 +1,10 @@
 import React, { useState } from "react";
 import { format, parseJSON } from "date-fns";
+import { useTotal } from "../../../customHooks/useTotal";
 const Ower = ({ owerTrackList, owerName }) => {
   const [showDetails, setShowDetails] = useState(false);
 
-  const totalOwing = owerTrackList.reduce((acc, owing) => {
-    const amount = parseFloat(owing.amount.replace(/[^\d.]/g, ""));
-    if (owing.spent === "Owing") {
-      return acc + Number(amount);
-    } else if (owing.gained === "Return") {
-      return acc - Number(amount);
-    }
-  }, 0);
+  const totalOwing = Math.abs(useTotal(owerTrackList));
 
   return (
     <ul className="ower" onClick={() => setShowDetails((prev) => !prev)}>
@@ -30,7 +24,9 @@ const Ower = ({ owerTrackList, owerName }) => {
           return (
             <li key={owing.id} style={style}>
               {`
-            ${format(parseJSON(owing.selectedDay), "PPP")} - ${owing.amount}
+            ${format(parseJSON(owing.selectedDay), "PPP")} - ${Math.abs(
+                owing.amount
+              )}
             `}
             </li>
           );

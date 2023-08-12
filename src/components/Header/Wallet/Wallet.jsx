@@ -5,35 +5,26 @@ import { GiTakeMyMoney } from "react-icons/gi";
 import { BsFillCalendarMonthFill } from "react-icons/bs";
 import { NumericFormat } from "react-number-format";
 import { isSameMonth, parseJSON, isSameDay } from "date-fns";
-
+import { useTotal } from "../../../customHooks/useTotal";
 const Wallet = ({ trackList, initialBank }) => {
   const initialBudget = initialBank.replace(/[^\d.]/g, "");
-  const total = trackList.reduce((acc, track) => {
-    const amount = parseFloat(track.amount.replace(/[^\d.]/g, ""));
-    if (track.type === "gain") {
-      return acc + Number(amount);
-    } else if (track.type === "loss") {
-      return acc - Number(amount);
-    }
-  }, 0);
+
+  const total = useTotal(trackList);
+  const wallet = total + Number(initialBudget);
 
   const thisMonth = trackList.filter((track) =>
     isSameMonth(parseJSON(track.selectedDay), new Date())
   );
 
   const thisMonthGained = thisMonth.filter((track) => track.type === "gain");
-  const monthGained = thisMonthGained.reduce((acc, track) => {
-    const amount = parseFloat(track.amount.replace(/[^\d.]/g, ""));
-    return acc + Number(amount);
-  }, 0);
+  const monthGained = useTotal(thisMonthGained);
 
   const thisMonthSpent = thisMonth.filter(
     (record) => record.type === "loss" || record.gained === "Return"
   );
+  const monthSpent = useTotal(thisMonthSpent);
 
-  const wallet = total + Number(initialBudget);
-
-  //
+  const diff = monthGained + monthSpent;
 
   function giveStyle(value) {
     if (value <= 0) {
@@ -50,17 +41,6 @@ const Wallet = ({ trackList, initialBank }) => {
       return gainStyle;
     }
   }
-
-  const monthSpent = thisMonthSpent.reduce((acc, track) => {
-    const amount = parseFloat(track.amount.replace(/[^\d.]/g, ""));
-    if (track.type === "gain") {
-      return acc + Number(amount);
-    } else if (track.type === "loss") {
-      return acc - Number(amount);
-    }
-  }, 0);
-
-  const diff = monthGained + monthSpent;
 
   return (
     <div className="rightHeader">

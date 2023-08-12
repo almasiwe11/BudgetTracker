@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import { isSameMonth, parseJSON, format, isSameYear } from "date-fns";
+import { useTotal } from "../../customHooks/useTotal";
 
 const Stats = ({
   trackList,
@@ -25,46 +26,35 @@ const Stats = ({
       isSameYear(parseJSON(track.selectedDay), selectedDay)
     );
   }
+
   const allLossesDuringPeriod = dataOfThePeriod.filter(
     (track) => track.type === "loss"
   );
-
   const moneyReturnDuringPeriod = dataOfThePeriod.filter(
     (track) => track.gained === "Return"
   );
 
-  const spentTotalDuringPeriod = allLossesDuringPeriod.reduce((acc, spent) => {
-    const amount = parseFloat(spent.amount.replace(/[^\d.]/g, ""));
-    return acc + Number(amount);
-  }, 0);
+  const spentTotalDuringPeriod = useTotal(allLossesDuringPeriod);
 
   const types = [];
   let expenditure = [];
   for (let i = 0; i < allLossesDuringPeriod.length; i++) {
-    if (types.indexOf(allLossesDuringPeriod[i].spent) === -1) {
+    if (!types.includes(allLossesDuringPeriod[i].spent)) {
       const spentOn = allLossesDuringPeriod.filter(
         (loss) => loss.spent === allLossesDuringPeriod[i].spent
       );
-      const totalSpentOn = spentOn.reduce((acc, spent) => {
-        const amount = parseFloat(spent.amount.replace(/[^\d.]/g, ""));
-        return acc + Number(amount);
-      }, 0);
+      const totalSpentOn = useTotal(spentOn);
       const obj = {
         type: allLossesDuringPeriod[i].spent,
-        totalSpent: totalSpentOn,
+        totalSpent: Math.abs(totalSpentOn),
       };
       types.push(allLossesDuringPeriod[i].spent);
       expenditure.push(obj);
     }
   }
 
-  let moneyBackTotal;
   if (types.indexOf("Owing") !== -1) {
-    moneyBackTotal = moneyReturnDuringPeriod.reduce((acc, spent) => {
-      const amount = parseFloat(spent.amount.replace(/[^\d.]/g, ""));
-      return acc + Number(amount);
-    }, 0);
-
+    const moneyBackTotal = useTotal(moneyReturnDuringPeriod);
     expenditure = expenditure.map((expend) => {
       if (expend.type === "Owing") {
         const newTotal = expend.totalSpent - moneyBackTotal;

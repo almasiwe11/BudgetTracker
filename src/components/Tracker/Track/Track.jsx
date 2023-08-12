@@ -50,7 +50,7 @@ const Track = ({
           {type === "gain" ? <p>{gained}</p> : <p>{spent}</p>}
           {toWho && <p>{toWho}</p>}
           {description && <p>{description}</p>}
-          <p>{amount} tg</p>
+          <p>{Math.abs(amount).toLocaleString()} tg</p>
           {isHovered && (
             <>
               <RiDeleteBin6Fill
