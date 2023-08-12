@@ -13,7 +13,6 @@ const CalendarGrid = ({
   handlePrev,
   showEntireMonth,
   setShowEntireMonth,
-  disabled,
 }) => {
   let startMonday;
   if (showEntireMonth) {
@@ -55,7 +54,6 @@ const CalendarGrid = ({
         <AiOutlineRightCircle
           className={showEntireMonth ? "hide" : "btnMonth"}
           onClick={handleNext}
-          disabled={disabled}
         />
       </div>
     </div>

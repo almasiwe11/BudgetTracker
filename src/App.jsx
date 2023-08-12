@@ -32,14 +32,9 @@ function App() {
   }
 
   function handleNext() {
-    if (!disabled) {
-      !showEntireMonth && setToday((today) => add(today, { weeks: 1 }));
-      showEntireMonth && setToday((today) => add(today, { months: 1 }));
-    }
+    !showEntireMonth && setToday((today) => add(today, { weeks: 1 }));
+    showEntireMonth && setToday((today) => add(today, { months: 1 }));
   }
-
-  let disabled = true;
-  if (!isFuture(add(startOfWeek(today), { weeks: 1 }))) disabled = false;
 
   return (
     <div className="app">
@@ -52,10 +47,14 @@ function App() {
           handlePrev={handlePrev}
           showEntireMonth={showEntireMonth}
           setToday={setToday}
-          disabled={disabled}
           setShowEntireMonth={setShowEntireMonth}
+          today={today}
         />
-        <Wallet trackList={trackList} initialBank={initialBank} />
+        <Wallet
+          trackList={trackList}
+          initialBank={initialBank}
+          selectedDay={selectedDay}
+        />
       </>
       <AllApps />
       <CalendarGrid
@@ -65,7 +64,6 @@ function App() {
         selectedDay={selectedDay}
         showEntireMonth={showEntireMonth}
         setShowEntireMonth={setShowEntireMonth}
-        disabled={disabled}
         handleNext={handleNext}
         handlePrev={handlePrev}
       />

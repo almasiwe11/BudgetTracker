@@ -5,12 +5,11 @@ const DayCell = ({
   day,
   setSelectedDay,
   showEntireMonth,
-  today,
   setShowEntireMonth,
   selectedDay,
   setToday,
 }) => {
-  const formattedDay = format(day, "dd");
+  const formattedDay = format(day, "d");
   const nameDay = format(day, "EE");
   let selected = false;
   let wrongMonth = false;

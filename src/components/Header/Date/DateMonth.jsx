@@ -15,14 +15,14 @@ const DateMonth = ({
   selectedDay,
   handlePrev,
   handleNext,
+  today,
   showEntireMonth,
-  disabled,
   setShowEntireMonth,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isHoveredRight, setIsHoveredRight] = useState(false);
   let goBack = false;
-  const formatted = format(selectedDay, "MMMM y");
+  const formatted = format(today, "MMMM y");
 
   if (!isSameWeek(selectedDay, new Date(), { weekStartsOn: 1 })) goBack = true;
 
@@ -56,7 +56,6 @@ const DateMonth = ({
         <AiOutlineRightCircle
           className={showEntireMonth ? "btnWeek" : "hide"}
           onClick={handleNext}
-          disabled={disabled}
           onMouseEnter={() => setIsHoveredRight(true)}
         />
       )}

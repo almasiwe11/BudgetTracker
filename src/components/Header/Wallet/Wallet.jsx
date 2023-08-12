@@ -4,23 +4,25 @@ import { TfiExchangeVertical } from "react-icons/tfi";
 import { BsFillCalendarMonthFill } from "react-icons/bs";
 import { isSameMonth, parseJSON } from "date-fns";
 import { useTotal } from "../../../customHooks/useTotal";
-const Wallet = ({ trackList, initialBank }) => {
+const Wallet = ({ trackList, initialBank, selectedDay }) => {
   const initialBudget = initialBank.replace(/[^\d.]/g, "");
 
   const total = useTotal(trackList);
   const wallet = total + Number(initialBudget);
 
-  const thisMonth = trackList.filter((track) =>
-    isSameMonth(parseJSON(track.selectedDay), new Date())
+  const selectedMonth = trackList.filter((track) =>
+    isSameMonth(parseJSON(track.selectedDay), selectedDay)
   );
 
-  const thisMonthGained = thisMonth.filter((track) => track.type === "gain");
-  const monthGained = useTotal(thisMonthGained);
+  const selectedMonthGained = selectedMonth.filter(
+    (track) => track.type === "gain"
+  );
+  const monthGained = useTotal(selectedMonthGained);
 
-  const thisMonthSpent = thisMonth.filter(
+  const selectedMonthSpent = selectedMonth.filter(
     (record) => record.type === "loss" || record.gained === "Return"
   );
-  const monthSpent = useTotal(thisMonthSpent);
+  const monthSpent = useTotal(selectedMonthSpent);
 
   const diff = monthGained + monthSpent;
 
