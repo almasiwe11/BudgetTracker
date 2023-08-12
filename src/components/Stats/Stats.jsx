@@ -8,10 +8,10 @@ const Stats = ({
   selectedDay,
   setFilterTracker,
   setTrackEntireMonth,
-  period,
-  setPeriod,
 }) => {
   const [display, setDisplay] = useState("Number");
+  const [period, setPeriod] = useState("Selected Month");
+
   const formatted = format(selectedDay, "MMMM y");
   let dataOfThePeriod;
 
@@ -66,7 +66,7 @@ const Stats = ({
   }
 
   function handleStat(type) {
-    setFilterTracker(type);
+    setFilterTracker({ expenditure: type, period });
     setTrackEntireMonth(true);
   }
 

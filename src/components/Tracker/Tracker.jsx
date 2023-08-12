@@ -13,7 +13,6 @@ const Tracker = ({
   trackEntireMonth,
   setTrackEntireMonth,
   setFilterTracker,
-  period,
 }) => {
   const [addBudget, setAddBudget] = useState(false);
 
@@ -39,7 +38,9 @@ const Tracker = ({
   return (
     <div className="tracker">
       <div className="selected-date">
-        {selectedDate}
+        {filterTracker
+          ? `${filterTracker.period} for ${filterTracker.expenditure} expenditures`
+          : selectedDate}
         <span>
           <input
             type="radio"
@@ -59,12 +60,9 @@ const Tracker = ({
       </div>
       {trackEntireMonth ? (
         <MonthTracker
-          trackList={trackList.filter((track) =>
-            isSameMonth(selectedDay, parseJSON(track.selectedDay))
-          )}
+          trackList={trackList}
           setTrackList={setTrackList}
           filterTracker={filterTracker}
-          period={period}
           selectedDay={selectedDay}
         />
       ) : (

@@ -1,29 +1,55 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import Track from "../Track/Track";
-import { parseJSON } from "date-fns";
+import { parseJSON, isSameMonth, isSameYear } from "date-fns";
 import { usePagination } from "../../../customHooks/usePagination";
 import Pagination from "../../Pagination/Pagination";
 
-const MonthTracker = ({ trackList, setTrackList, filterTracker }) => {
+const MonthTracker = ({
+  trackList,
+  setTrackList,
+  filterTracker,
+  selectedDay,
+}) => {
   const [filter, setFilter] = useState("All");
   let filteredData;
+  let thisPeriod;
 
-  if (filterTracker === "Owing") {
-    filteredData = trackList.filter(
-      (track) => track.spent === filterTracker || track.gained === "Return"
+  if (!filterTracker) {
+    thisPeriod = trackList.filter((track) =>
+      isSameMonth(selectedDay, parseJSON(track.selectedDay))
     );
-  } else if (filterTracker) {
-    filteredData = trackList.filter((track) => track.spent === filterTracker);
+  } else {
+    const { expenditure, period } = filterTracker;
+
+    if (period === "This Year") {
+      thisPeriod = trackList.filter((track) =>
+        isSameYear(selectedDay, parseJSON(track.selectedDay))
+      );
+    } else if (period === "Selected Month") {
+      thisPeriod = trackList.filter((track) =>
+        isSameMonth(selectedDay, parseJSON(track.selectedDay))
+      );
+    } else if (period === "All Time") {
+      thisPeriod = trackList;
+    }
+
+    if (expenditure === "Owing") {
+      filteredData = thisPeriod.filter(
+        (track) => track.spent === expenditure || track.gained === "Return"
+      );
+    } else if (filterTracker) {
+      filteredData = thisPeriod.filter((track) => track.spent === expenditure);
+    }
   }
 
   if (!filterTracker) {
     if (filter === "Spent") {
-      filteredData = trackList.filter((track) => track.type === "loss");
+      filteredData = thisPeriod.filter((track) => track.type === "loss");
     } else if (filter === "Gained") {
-      filteredData = trackList.filter((track) => track.type === "gain");
+      filteredData = thisPeriod.filter((track) => track.type === "gain");
     } else {
-      filteredData = trackList;
+      filteredData = thisPeriod;
     }
   }
 
@@ -39,7 +65,7 @@ const MonthTracker = ({ trackList, setTrackList, filterTracker }) => {
 
   return (
     <div>
-      {trackList.length > 0 && !filterTracker && (
+      {thisPeriod.length > 0 && !filterTracker && (
         <select
           name="filter"
           id="filter"
@@ -61,7 +87,6 @@ const MonthTracker = ({ trackList, setTrackList, filterTracker }) => {
           toWho={track.toWho}
           amount={track.amount}
           type={track.type}
-          trackList={trackList}
           id={track.id}
           disabled={true}
           selectedDay={track.selectedDay}
