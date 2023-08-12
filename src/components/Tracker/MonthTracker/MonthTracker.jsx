@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+/* eslint-disable react/prop-types */
+import { useState } from "react";
 import Track from "../Track/Track";
-import { parseJSON, isSameMonth } from "date-fns";
-
+import { parseJSON } from "date-fns";
+import { usePagination } from "../../../customHooks/usePagination";
 import Pagination from "../../Pagination/Pagination";
 
 const MonthTracker = ({ trackList, setTrackList, filterTracker }) => {
-  /*    */
-
-  console.log(filterTracker);
   const [filter, setFilter] = useState("All");
   let filteredData;
 
@@ -18,8 +16,6 @@ const MonthTracker = ({ trackList, setTrackList, filterTracker }) => {
   } else if (filterTracker) {
     filteredData = trackList.filter((track) => track.spent === filterTracker);
   }
-
-  console.log(filteredData);
 
   if (!filterTracker) {
     if (filter === "Spent") {
@@ -37,22 +33,9 @@ const MonthTracker = ({ trackList, setTrackList, filterTracker }) => {
     return dateA - dateB;
   });
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 20;
-  const totalPages = Math.ceil(sortedData.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const displayedItems = sortedData.slice(startIndex, endIndex);
-
-  function handlePrev() {
-    if (currentPage === 1) return;
-    setCurrentPage((prev) => prev - 1);
-  }
-
-  function handleNext() {
-    if (currentPage === totalPages) return;
-    setCurrentPage((prev) => prev + 1);
-  }
+  const itemsPerPage = 18;
+  const { currentPage, totalPages, handleNext, handlePrev, displayedItems } =
+    usePagination(sortedData, itemsPerPage);
 
   return (
     <div>

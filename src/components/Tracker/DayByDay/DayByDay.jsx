@@ -5,6 +5,7 @@ import Inputs from "../Inputs/Inputs";
 import Track from "../Track/Track";
 import GainLoss from "../GainLoss/GainLoss";
 import Pagination from "../../Pagination/Pagination";
+import { usePagination } from "../../../customHooks/usePagination";
 
 const DayByDay = ({
   trackList,
@@ -14,22 +15,9 @@ const DayByDay = ({
   setTrackList,
   selectedDay,
 }) => {
-  const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
-  const totalPages = Math.ceil(selectedList.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const displayedItems = selectedList.slice(startIndex, endIndex);
-
-  function handlePrev() {
-    if (currentPage === 1) return;
-    setCurrentPage((prev) => prev - 1);
-  }
-
-  function handleNext() {
-    if (currentPage === totalPages) return;
-    setCurrentPage((prev) => prev + 1);
-  }
+  const { currentPage, totalPages, handleNext, handlePrev, displayedItems } =
+    usePagination(selectedList, itemsPerPage);
 
   return (
     <div className="day-by-day">
