@@ -122,6 +122,12 @@ const Inputs = ({
         onChange={handleAmount}
         onKeyDown={handleEnter}
       />
+      <button
+        className={`add ${type === "gain" ? "gainBtn" : "lossBtn"} `}
+        type="submit"
+      >
+        Add
+      </button>
     </form>
   );
 };

@@ -307,6 +307,22 @@ input[type=number] {
   min-width: 50%;
 }
 
+.add {
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  color: var(--color-grey-light);
+  cursor: pointer;
+}
+
+.gainBtn {
+  background-color: var(--color-green);
+}
+
+.lossBtn {
+  background-color: var(--color-red);
+}
+
 .allApps {
   display: flex;
   position: fixed;
