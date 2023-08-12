@@ -2,40 +2,57 @@ import React, { useState } from "react";
 import Track from "../Track/Track";
 import { parseJSON, isSameMonth } from "date-fns";
 
-import NextPage from "../../NextPage/NextPage";
+import Pagination from "../../Pagination/Pagination";
 
 const MonthTracker = ({ trackList, setTrackList, filterTracker }) => {
-  /*   .filter((track) =>
-            isSameMonth(selectedDay, parseJSON(track.selectedDay))
-          ) */
+  /*    */
+
+  console.log(filterTracker);
   const [filter, setFilter] = useState("All");
-  let sortedData;
+  let filteredData;
 
   if (filterTracker === "Owing") {
-    sortedData = trackList.filter(
+    filteredData = trackList.filter(
       (track) => track.spent === filterTracker || track.gained === "Return"
     );
   } else if (filterTracker) {
-    sortedData = trackList.filter((track) => track.spent === filterTracker);
+    filteredData = trackList.filter((track) => track.spent === filterTracker);
   }
+
+  console.log(filteredData);
 
   if (!filterTracker) {
     if (filter === "Spent") {
-      sortedData = trackList.filter((track) => track.type === "loss");
+      filteredData = trackList.filter((track) => track.type === "loss");
     } else if (filter === "Gained") {
-      sortedData = trackList.filter((track) => track.type === "gain");
+      filteredData = trackList.filter((track) => track.type === "gain");
     } else {
-      sortedData = trackList;
+      filteredData = trackList;
     }
   }
 
-  sortedData = sortedData.sort((a, b) => {
+  const sortedData = filteredData.sort((a, b) => {
     const dateA = parseJSON(a.selectedDay);
     const dateB = parseJSON(b.selectedDay);
     return dateA - dateB;
   });
 
-  const [displayedItems, setDisplayedItems] = useState(sortedData);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
+  const totalPages = Math.ceil(sortedData.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const displayedItems = sortedData.slice(startIndex, endIndex);
+
+  function handlePrev() {
+    if (currentPage === 1) return;
+    setCurrentPage((prev) => prev - 1);
+  }
+
+  function handleNext() {
+    if (currentPage === totalPages) return;
+    setCurrentPage((prev) => prev + 1);
+  }
 
   return (
     <div>
@@ -69,10 +86,11 @@ const MonthTracker = ({ trackList, setTrackList, filterTracker }) => {
           setTrackList={setTrackList}
         />
       ))}
-      <NextPage
-        array={sortedData}
-        itemsPerPage={20}
-        setDisplayedItems={setDisplayedItems}
+      <Pagination
+        currentPage={currentPage}
+        handlePrev={handlePrev}
+        handleNext={handleNext}
+        totalPages={totalPages}
       />
     </div>
   );

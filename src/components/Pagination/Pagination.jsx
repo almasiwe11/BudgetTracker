@@ -2,33 +2,7 @@ import React, { useState, useEffect } from "react";
 import { AiFillLeftCircle } from "react-icons/ai";
 import { AiFillRightCircle } from "react-icons/ai";
 
-const NextPage = ({
-  array,
-  itemsPerPage,
-  setDisplayedItems,
-  addBudget = false,
-}) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(array.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-
-  useEffect(() => {
-    setDisplayedItems(array.slice(startIndex, endIndex));
-
-    if (addBudget) setCurrentPage(totalPages);
-  }, [currentPage, array]);
-
-  function handlePrev() {
-    if (currentPage === 1) return;
-    setCurrentPage((prev) => prev - 1);
-  }
-
-  function handleNext() {
-    if (currentPage === totalPages) return;
-    setCurrentPage((prev) => prev + 1);
-  }
-
+const Pagination = ({ currentPage, handlePrev, handleNext, totalPages }) => {
   let showPrev = false;
   if (currentPage > 1) showPrev = true;
   let showNext = true;
@@ -55,4 +29,4 @@ const NextPage = ({
   );
 };
 
-export default NextPage;
+export default Pagination;

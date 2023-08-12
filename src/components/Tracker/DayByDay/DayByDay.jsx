@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import { useState } from "react";
 import { nanoid } from "nanoid";
 import Inputs from "../Inputs/Inputs";
 import Track from "../Track/Track";
 import GainLoss from "../GainLoss/GainLoss";
-import NextPage from "../../NextPage/NextPage";
+import Pagination from "../../Pagination/Pagination";
 
 const DayByDay = ({
   trackList,
@@ -14,16 +14,26 @@ const DayByDay = ({
   setTrackList,
   selectedDay,
 }) => {
-  const [displayedItems, setDisplayedItems] = useState(selectedList);
-  let display;
-  if (selectedList.length > 1) {
-    display = displayedItems;
-  } else {
-    display = selectedList;
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
+  const totalPages = Math.ceil(selectedList.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const displayedItems = selectedList.slice(startIndex, endIndex);
+
+  function handlePrev() {
+    if (currentPage === 1) return;
+    setCurrentPage((prev) => prev - 1);
   }
+
+  function handleNext() {
+    if (currentPage === totalPages) return;
+    setCurrentPage((prev) => prev + 1);
+  }
+
   return (
     <div className="day-by-day">
-      {display.map((track) => (
+      {displayedItems.map((track) => (
         <Track
           key={track.id}
           spent={track.spent}
@@ -49,11 +59,11 @@ const DayByDay = ({
         />
       )}
       <GainLoss setAddBudget={setAddBudget} />
-      <NextPage
-        itemsPerPage={12}
-        array={selectedList}
-        setDisplayedItems={setDisplayedItems}
-        addBudget={addBudget}
+      <Pagination
+        currentPage={currentPage}
+        handlePrev={handlePrev}
+        handleNext={handleNext}
+        totalPages={totalPages}
       />
     </div>
   );

@@ -62,7 +62,9 @@ const Tracker = ({
       </div>
       {trackEntireMonth ? (
         <MonthTracker
-          trackList={trackList}
+          trackList={trackList.filter((track) =>
+            isSameMonth(selectedDay, parseJSON(track.selectedDay))
+          )}
           setTrackList={setTrackList}
           filterTracker={filterTracker}
           period={period}
