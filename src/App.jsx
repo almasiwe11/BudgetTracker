@@ -55,7 +55,7 @@ function App() {
           selectedDay={selectedDay}
         />
       </>
-      <AllApps />
+      {/* <AllApps /> */}
       <CalendarGrid
         today={today}
         setToday={setToday}

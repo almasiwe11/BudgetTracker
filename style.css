@@ -54,19 +54,6 @@
   cursor: pointer;
 }
 
-/* .header {
-  color: var(--color-grey-light);
-  height: 3.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.7rem;
-  position: relative;
-  font-size: 1.4rem;
-  padding: 0 4%;
-  padding-top: 1%;
-  margin-bottom: 0.5rem;
-} */
 .toggleView {
   position: absolute;
   right: 3.5%;
@@ -121,6 +108,7 @@
   justify-content: end;
   gap: 2rem;
 }
+
 .wallet-icon {
   fill: var(--color-green);
   height: 32px;
@@ -140,6 +128,11 @@
   margin-bottom: 1rem;
 }
 
+@media (max-width: 1243px) {
+  .logo {
+    font-size: 2.2rem;
+  }
+}
 .tracker {
   display: flex;
   flex-direction: column;
@@ -354,7 +347,7 @@ input[type=number] {
 
 .app {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr minmax(24rem 2fr) minmax(15rem 1fr);
   grid-template-rows: 8vh min-content 1fr 7vh;
   width: 95%;
   margin: 0 auto;
