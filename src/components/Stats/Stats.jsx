@@ -101,7 +101,7 @@ const Stats = ({
           let showSpentType;
           if (display === "Percentage") {
             showSpentType = `${(
-              (type.totalSpent / spentTotalDuringPeriod) *
+              (Math.abs(type.totalSpent) / Math.abs(spentTotalDuringPeriod)) *
               100
             ).toFixed(2)}%`;
           } else {

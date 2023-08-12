@@ -136,6 +136,10 @@
   font-size: 0, 8rem;
 }
 
+.stats-header {
+  margin-bottom: 1rem;
+}
+
 .tracker {
   display: flex;
   flex-direction: column;
@@ -341,6 +345,7 @@ input[type=number] {
 
 .owers h2 {
   text-align: center;
+  margin-bottom: 1rem;
 }
 
 .ower {
@@ -402,19 +407,25 @@ input[type=number] {
 }
 
 .owers {
+  margin-top: 2rem;
   grid-column: 1/2;
-  grid-row: 3/4;
+  grid-row: 2/4;
 }
 
 .stats {
+  margin-top: 2rem;
   grid-column: 3/4;
-  grid-row: 3/4;
+  grid-row: 2/4;
   color: var(--color-grey-light);
   padding-left: 1.8rem;
 }
 
 .stat {
   cursor: pointer;
+}
+
+li {
+  list-style: number;
 }
 
 :root {

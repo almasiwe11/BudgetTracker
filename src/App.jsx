@@ -17,7 +17,7 @@ function App() {
   );
   const [filterTracker, setFilterTracker] = useState(false);
   const [trackList, setTrackList] = useState(
-    JSON.parse(localStorage.getItem("trackList")) || []
+    () => JSON.parse(localStorage.getItem("trackList")) || []
   );
   const [trackEntireMonth, setTrackEntireMonth] = useState(false);
   const [period, setPeriod] = useState("Selected Month");
@@ -37,10 +37,6 @@ function App() {
       showEntireMonth && setToday((today) => add(today, { months: 1 }));
     }
   }
-
-  /* useEffect(() => {
-    const initial = localStorage.getItem("Initial-bank");
-  }, []); */
 
   let disabled = true;
   if (!isFuture(add(startOfWeek(today), { weeks: 1 }))) disabled = false;
