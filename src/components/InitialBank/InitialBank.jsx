@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { NumericFormat } from "react-number-format";
 
 const InitialBank = ({ setInitialBank }) => {

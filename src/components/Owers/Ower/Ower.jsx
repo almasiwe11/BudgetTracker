@@ -26,7 +26,7 @@ const Ower = ({ owerTrackList, owerName }) => {
               {`
             ${format(parseJSON(owing.selectedDay), "PPP")} - ${Math.abs(
                 owing.amount
-              )}
+              ).toLocaleString()}
             `}
             </li>
           );

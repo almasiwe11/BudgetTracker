@@ -1,19 +1,7 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
 import { AiOutlineLeftCircle } from "react-icons/ai";
-import { AiFillLeftCircle } from "react-icons/ai";
-import { AiFillRightCircle } from "react-icons/ai";
 import { AiOutlineRightCircle } from "react-icons/ai";
-import {
-  format,
-  add,
-  startOfMonth,
-  isMonday,
-  sub,
-  isFuture,
-  startOfWeek,
-  isSameDay,
-} from "date-fns";
+import { format, add, startOfMonth, startOfWeek } from "date-fns";
 import DayCell from "./DayCell/DayCell";
 import DayNames from "./DayNames/DayNames";
 const CalendarGrid = ({
@@ -33,12 +21,8 @@ const CalendarGrid = ({
     startMonday = startOfWeek(startMonthDay, { weekStartsOn: 1 });
   } else if (selectedDay) {
     startMonday = startOfWeek(today, { weekStartsOn: 1 });
-  } else {
-    startMonday = startOfWeek(today, { weekStartsOn: 1 });
   }
 
-  const month = format(today, "MMMM");
-  const year = format(today, "yyyy");
   const monthDays = [...Array(showEntireMonth ? 42 : 7)].map((_, i) =>
     add(startMonday, { days: i })
   );

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import CalendarGrid from "./components/CalendarGrid/CalendarGrid";
 import Tracker from "./components/Tracker/Tracker";
 import AllApps from "./components/AllApps/AllApps";

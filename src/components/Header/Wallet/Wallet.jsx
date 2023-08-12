@@ -1,10 +1,8 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import { FaWallet } from "react-icons/fa";
 import { TfiExchangeVertical } from "react-icons/tfi";
-import { GiTakeMyMoney } from "react-icons/gi";
 import { BsFillCalendarMonthFill } from "react-icons/bs";
-import { NumericFormat } from "react-number-format";
-import { isSameMonth, parseJSON, isSameDay } from "date-fns";
+import { isSameMonth, parseJSON } from "date-fns";
 import { useTotal } from "../../../customHooks/useTotal";
 const Wallet = ({ trackList, initialBank }) => {
   const initialBudget = initialBank.replace(/[^\d.]/g, "");
