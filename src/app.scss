@@ -59,7 +59,8 @@
 }
 
 .stats {
-  margin-top: 2rem;
+  width: 80%;
+  margin: 2rem auto;
   grid-column: 3/4;
   grid-row: 2/4;
   color: var(--color-grey-light);
@@ -72,4 +73,10 @@
 
 li {
   list-style: number;
+}
+
+.stats__selected-month {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
 }

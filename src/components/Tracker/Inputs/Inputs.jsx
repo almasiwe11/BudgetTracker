@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { NumericFormat } from "react-number-format";
 import Gained from "../Gained/Gained";
 import Spent from "../Spent/Spent";
@@ -24,6 +24,8 @@ const Inputs = ({
   const [amount, setAmount] = useState(amountEditing);
   const [description, setDescription] = useState(descriptionEditing);
   const [toWho, setToWho] = useState(toWhoEditing);
+
+  const inputRef = useRef();
 
   let owing;
   if (spent === "Owing" || gained === "Return") owing = true;
@@ -52,7 +54,6 @@ const Inputs = ({
       selectedDay,
       gained: type === "gain" ? gained : null,
     };
-    //  type === "loss" ? Number(amount) * -1 : amount,
     if (editing) {
       setTrackList((prev) =>
         prev.map((track) => {
@@ -75,8 +76,23 @@ const Inputs = ({
     }
   }
 
+  useEffect(() => {
+    function handler(e) {
+      if (!inputRef.current.contains(e.target)) {
+        console.log("werer");
+        setAddBudget(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
   return (
-    <form onSubmit={handleSubmit} className={`inputs `}>
+    <form onSubmit={handleSubmit} className={`inputs `} ref={inputRef}>
       {type === "gain" ? (
         <Gained gained={gained} setGained={setGained} />
       ) : (

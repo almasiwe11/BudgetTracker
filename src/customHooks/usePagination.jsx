@@ -23,5 +23,6 @@ export function usePagination(array, itemsPerPage) {
     currentPage,
     displayedItems,
     totalPages,
+    setCurrentPage,
   };
 }

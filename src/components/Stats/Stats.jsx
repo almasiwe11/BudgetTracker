@@ -73,7 +73,7 @@ const Stats = ({
   return (
     <div className="stats">
       <div className="stats-header">
-        {formatted}
+        <div className="stats__selected-month">{formatted}</div>
         <select
           name="period"
           id="period"

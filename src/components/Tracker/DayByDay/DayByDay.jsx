@@ -16,8 +16,14 @@ const DayByDay = ({
   selectedDay,
 }) => {
   const itemsPerPage = 12;
-  const { currentPage, totalPages, handleNext, handlePrev, displayedItems } =
-    usePagination(selectedList, itemsPerPage);
+  const {
+    currentPage,
+    totalPages,
+    handleNext,
+    handlePrev,
+    displayedItems,
+    setCurrentPage,
+  } = usePagination(selectedList, itemsPerPage);
 
   return (
     <div className="day-by-day">
@@ -46,7 +52,11 @@ const DayByDay = ({
           id={nanoid()}
         />
       )}
-      <GainLoss setAddBudget={setAddBudget} />
+      <GainLoss
+        setAddBudget={setAddBudget}
+        setCurrentPage={setCurrentPage}
+        totalPages={totalPages}
+      />
       <Pagination
         currentPage={currentPage}
         handlePrev={handlePrev}

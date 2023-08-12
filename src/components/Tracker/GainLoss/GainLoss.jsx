@@ -1,14 +1,23 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import { FcMoneyTransfer } from "react-icons/fc";
 import { GiPayMoney } from "react-icons/gi";
-const GainLoss = ({ setAddBudget }) => {
+const GainLoss = ({ setAddBudget, setCurrentPage, totalPages }) => {
   return (
     <div className="gain-loss">
       <FcMoneyTransfer
         className="paycheck"
-        onClick={() => setAddBudget("gain")}
+        onClick={() => {
+          setAddBudget("gain");
+          totalPages > 1 && setCurrentPage(totalPages);
+        }}
       />
-      <GiPayMoney className="spendMoney" onClick={() => setAddBudget("loss")} />
+      <GiPayMoney
+        className="spendMoney"
+        onClick={() => {
+          setAddBudget("loss");
+          totalPages > 1 && setCurrentPage(totalPages);
+        }}
+      />
     </div>
   );
 };
