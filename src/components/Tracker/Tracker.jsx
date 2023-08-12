@@ -13,6 +13,7 @@ const Tracker = ({
   trackEntireMonth,
   setTrackEntireMonth,
   setFilterTracker,
+  showEntireMonth,
 }) => {
   const [addBudget, setAddBudget] = useState(false);
 
@@ -36,7 +37,7 @@ const Tracker = ({
   );
 
   return (
-    <div className="tracker">
+    <div className={`tracker ${showEntireMonth ? "moveDown" : "moveCloser"}`}>
       <div className="selected-date">
         {filterTracker
           ? `${filterTracker.period} for ${filterTracker.expenditure} expenditures`

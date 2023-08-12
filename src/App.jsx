@@ -67,6 +67,7 @@ function App() {
         handlePrev={handlePrev}
       />
       <Tracker
+        showEntireMonth={showEntireMonth}
         selectedDay={selectedDay}
         trackList={trackList}
         setTrackList={setTrackList}

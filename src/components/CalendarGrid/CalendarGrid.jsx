@@ -26,7 +26,7 @@ const CalendarGrid = ({
     add(startMonday, { days: i })
   );
   const weekDaysName = [...Array(7)].map((_, i) =>
-    format(add(startMonday, { days: i }), "EEEE")
+    format(add(startMonday, { days: i }), "EEE")
   );
 
   return (
