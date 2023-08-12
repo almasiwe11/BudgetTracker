@@ -41,34 +41,21 @@ const Inputs = ({
       return;
     }
     e.preventDefault();
+    const obj = {
+      id,
+      spent: type === "loss" ? spent : null,
+      toWho: toWho ? toWho : null,
+      amount,
+      description,
+      type,
+      selectedDay,
+      gained: type === "gain" ? gained : null,
+    };
+
     if (editing) {
       setTrackList((prev) =>
         prev.map((track) => {
           if (track.id === idEditing) {
-            let obj;
-            if (toWho) {
-              obj = {
-                id,
-                spent,
-                toWho,
-                amount,
-                description,
-                type,
-                selectedDay,
-                gained,
-              };
-            } else {
-              obj = {
-                id,
-                spent,
-                amount,
-                description,
-                type,
-                selectedDay,
-                gained,
-              };
-            }
-
             return obj;
           }
           return track;
@@ -76,19 +63,7 @@ const Inputs = ({
       );
       setEditing(false);
     } else {
-      setTrackList((prev) => [
-        ...prev,
-        {
-          id,
-          spent: type === "loss" ? spent : null,
-          toWho: toWho ? toWho : null,
-          amount,
-          description,
-          type,
-          selectedDay,
-          gained: type === "gain" ? gained : null,
-        },
-      ]);
+      setTrackList((prev) => [...prev, obj]);
       setAddBudget(false);
     }
   }

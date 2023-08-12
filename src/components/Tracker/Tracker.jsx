@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { nanoid } from "nanoid";
-import Inputs from "./Inputs/Inputs";
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from "react";
 import { format, isSameDay, parseJSON, isSameMonth } from "date-fns";
-import Track from "./Track/Track";
-import GainLoss from "./GainLoss/GainLoss";
 import DayByDay from "./DayByDay/DayByDay";
 import MonthTracker from "./MonthTracker/MonthTracker";
 import { VscDebugStepBack } from "react-icons/vsc";
@@ -29,7 +26,7 @@ const Tracker = ({
   useEffect(() => {
     const fromStorage = JSON.parse(localStorage.getItem("trackList")) || [];
     setTrackList(fromStorage);
-  }, []);
+  }, [setTrackList]);
 
   useEffect(() => {
     localStorage.setItem("trackList", JSON.stringify(trackList));
