@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import Inputs from "../Inputs/Inputs";
 import { format, parseJSON } from "date-fns";
+import accounting from "accounting";
 
 const Track = ({
   spent,
@@ -19,6 +20,12 @@ const Track = ({
 }) => {
   const [editing, setEditing] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+
+  const formattedCurrency = accounting.formatMoney(Math.abs(amount), {
+    symbol: "тг",
+    format: "%v %s",
+    precision: 0,
+  });
 
   function handleDelete(id) {
     setTrackList((prev) => prev.filter((track) => track.id !== id));
@@ -50,7 +57,7 @@ const Track = ({
           {type === "gain" ? <p>{gained}</p> : <p>{spent}</p>}
           {toWho && <p>{toWho}</p>}
           {description && <p>{description}</p>}
-          <p>{Math.abs(amount).toLocaleString()} tg</p>
+          <p>{formattedCurrency}</p>
           {isHovered && (
             <>
               <RiDeleteBin6Fill
@@ -69,18 +76,3 @@ const Track = ({
 };
 
 export default Track;
-
-/*   <Inputs
-     key={track.id}
-     spent={track.spent}
-     gained={track.gained}
-     description={track.description}
-     toWho={track.toWho}
-     amount={track.amount}
-     type={track.type}
-     trackList={trackList}
-     setTrackList={setTrackList}
-     id={track.id}
-     editing={editing}
-     setEditing={setEditing}
-   />; */
