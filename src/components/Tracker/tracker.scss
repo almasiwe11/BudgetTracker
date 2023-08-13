@@ -71,6 +71,16 @@ input[type="radio"]:checked {
   font-size: 1.2rem;
 }
 
+@media (max-width: 850px) {
+  .day-by-day,
+  .monthTracker {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 1.1rem;
+  }
+}
+
 .resetFilter {
   cursor: pointer;
 }

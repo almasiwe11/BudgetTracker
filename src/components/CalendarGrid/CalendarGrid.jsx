@@ -30,7 +30,7 @@ const CalendarGrid = ({
   );
 
   return (
-    <div className="calendarGrid">
+    <div className={`calendarGrid ${showEntireMonth ? "month" : "week"}`}>
       <div className={showEntireMonth ? "showEntireMonth" : "showWeek"}>
         {showEntireMonth && <DayNames weekDaysName={weekDaysName} />}
 
